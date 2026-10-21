@@ -186,7 +186,7 @@ function renderEvents(evs){
 for(const [id,act] of [["b-pause","pause-toggle"],["b-sell","sell_all"],["b-kill","kill"]])
  $(id).onclick=async()=>{
   if(id==="b-kill"&&!confirm("KILL : fermer toutes les positions et arrêter le desk ?"))return;
-  await fetch("/api/ctl?action="+act,{method:"POST"});setTimeout(poll,400);};
+  await fetch("/api/ctl?action="+act,{method:"POST",headers:{"X-Requested-With":"desk-ui"}});setTimeout(poll,400);};
 setInterval(poll,2000);poll();
 </script></body></html>"""
 
