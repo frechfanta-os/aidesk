@@ -9,6 +9,7 @@ le portefeuille, ni ne contourne RISK.
 """
 from __future__ import annotations
 
+import json
 import sys
 import time
 from pathlib import Path
@@ -158,3 +159,43 @@ def test_ledger_intact_apres_tous_les_senarios(tmp_path, monkeypatch):
         res.decide(passing_signal(), time.time())
     assert led.wallet_usdt == w0 and led.vault_usdt == v0
     assert not led.trades                      # aucune opération comptable générée
+
+
+# 5 — D-résidu : objections STRUCTURÉES {"objection": str}, toujours non fiables --
+
+def test_json_objection_valide_extrait_le_champ(tmp_path, monkeypatch):
+    res, _ = make_research(tmp_path)
+    monkeypatch.setattr(llm, "critique",
+                        lambda a, b: '{"objection":"thèse fragile"}')
+    d = res.decide(passing_signal(), time.time())
+    assert d.objection == "thèse fragile"
+    assert d.verdict is True and d.agg > 0
+
+
+def test_json_objection_longue_re_bornée(tmp_path, monkeypatch):
+    res, _ = make_research(tmp_path)
+    payload = json.dumps({"objection": "MONOPOLE " * 60})     # ~480 chars
+    monkeypatch.setattr(llm, "critique", lambda a, b: payload)
+    d = res.decide(passing_signal(), time.time())
+    assert d.objection is not None
+    assert len(d.objection) <= MAX_OBJ
+
+
+def test_json_sans_champ_ou_non_str_vaut_none(tmp_path, monkeypatch):
+    res, _ = make_research(tmp_path)
+    for bad in ('{}', '{"objection": 42}', '{"objection": null}',
+                '{"objection": "   "}'):
+        monkeypatch.setattr(llm, "critique", lambda a, b, _b=bad: _b)
+        d = res.decide(passing_signal(), time.time())
+        assert d.objection is None, bad
+        assert d.verdict is True                              # décision inchangée
+
+
+def test_json_malform_et_non_json_texte_borne(tmp_path, monkeypatch):
+    res, _ = make_research(tmp_path)
+    monkeypatch.setattr(llm, "critique", lambda a, b: '{"objection": "coupé:')
+    d1 = res.decide(passing_signal(), time.time())
+    assert d1.objection == '{"objection": "coupé:'            # texte borné, tel quel
+    monkeypatch.setattr(llm, "critique", lambda a, b: "réticence normale en texte")
+    d2 = res.decide(passing_signal(), time.time())
+    assert d2.objection == "réticence normale en texte"

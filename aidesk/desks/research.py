@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from .. import llm
 from ..types import Decision, Signal
 from .base import Agent, clamp01
@@ -16,6 +18,29 @@ def _sanitize_objection(obj) -> str | None:
         return None
     t = " ".join(obj.split())                  # espaces/newlines/control chars collapsés
     return t[:_MAX_OBJ_CHARS] or None
+
+
+def _extract_objection(raw) -> str | None:
+    """B3+ : tente le schéma JSON {"objection": <str>} ; sinon texte libre borné.
+
+    La sortie LLM reste une entrée NON FIABLE dans les deux cas : re-nettoyée,
+    bornée à _MAX_OBJ_CHARS, jamais décisionnelle. JSON dict sans champ
+    `objection` string → None (structure présente mais vide → pas d'objection)."""
+    text = _sanitize_objection(raw)
+    if text is None:
+        return None
+    t = text.strip()
+    if t.startswith("{") and t.endswith("}"):
+        try:
+            obj = json.loads(t)
+        except Exception:
+            return text                       # JSON malformé → le texte borné reste
+        if isinstance(obj, dict):
+            val = obj.get("objection")
+            if isinstance(val, str) and _sanitize_objection(val):
+                return _sanitize_objection(val)   # re-borne le champ extracté
+            return None
+    return text
 
 
 class Research:
@@ -53,7 +78,7 @@ class Research:
         obj = None
         if verdict:                                # B3 : le SKEPTIC n'est appelé que
             try:                                   # sur un candidat accepté (utile);
-                obj = _sanitize_objection(llm.critique(   # toute sortie est non fiable.
+                obj = _extract_objection(llm.critique(  # toute sortie est non fiable.
                     f"{f.symbol} last={f.last} mom15={f.mom_15m:.4f} "
                     f"mom1h={f.mom_1h:.4f} vol_surprise={f.vol_surprise:.2f} "
                     f"qv={f.quote_volume_24h:.0f}",
