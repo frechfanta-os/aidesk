@@ -307,3 +307,34 @@ modifiée · scan secrets vide · `git diff --check` OK · runtime/feed NON touc
 **Non atteint en C** : la collecte whale LIVE avec les endpoints lourds reste
 bloquée sur la clé gratuite `AIDESK_RPC_URL` (état inchangé ; le layer est prêt,
 la clé activera le provider sans autre changement). Pas de GMGN (contrat).
+
+---
+
+# Phase E-2 / F-1 / D-résidu — **2026-10-21** ✅
+
+**E-2 · `tools/verify_desk.py`** — réconciliation SQLite (r-o) ↔ state.json ↔ events
+: correspondance trades (drift signalé), montants négatifs impossible, equity ≈
+wallet+vault+mtm, positions corrompues, provenance modes (B5), queue JSONL
+parseable, champs risk. Codes 0 OK / 1 avert / 2 fatal. 8 tests sur bases
+synthétiques (jamais la prod). Diagnostic honnête en route : unpack SQL 4→2
+(bug du code, corrigé), ledger.equity est une COURBE pas un scalaire (hypothèse
+fausse adoptée trop vite — corrigée, le dernier point est lu).
+Usage réel : code 0, 19 trades 11W/8L net +0.48, live 6 · unknown 13.
+
+**F-1 · `tools/export_dataset.py`** — corpus déterministe (tri id), CSV +
+manifeste (sha256 du fichier, rows, W/L, by_mode) ; avertissement explicite
+« données PAPER expérimentales, aucune garantie ». DB ouverte en URI ro
+(read-only strict testé). Ancien schéma sans colonne mode → substitué 'unknown'.
+Dataset réel exporté : docs/data/exp/trades_20261021T2201.csv + manifeste
+(committés = versionné par git). Bug d'appel CLI corrigé (sys.argv[0] passé).
+
+**D-résidu · objections SKEPTIC structurées** — `_extract_objection` : schéma
+JSON {"objection": <str>} tenté, champ extrait re-borné 160 c ; JSON sans champ
+valide/" non-str sur objet → None ; pas de JSON / malformé → texte libre borné
+(comportement B3 conservé). La sortie LLM reste 100 % NON FIABLE, jamais
+décisionnelle. Fournisseur/prompt/config inchangés ; 4 tests. Verdict/agg
+invariants (suite existante).
+
+**Suite complète : 108 passed** (91 → 108). `runtime/feed` non touchés ;
+diff/secret/`--check` clean. Restart desk requis (research.py), Restauration
+vérifiée après commit.
