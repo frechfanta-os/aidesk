@@ -7,10 +7,12 @@ head:
 desks:
   radar:
     agents: [SCOUT, FEED, SIGNAL]
-    poll_seconds: { SCOUT: 15, FEED: 45, SIGNAL: 30 }
+    poll_seconds: { SCOUT: 15, FEED: 45, SIGNAL: 30 }   # INFORMATIF, non consommé
+                            # (les desks tournent au tick universel ; audit B6-D)
   research:
     agents: [MEMORY, MEMORY-2]
-    checks: [momentum, volume_surprise, overextension, liquidity]
+    checks: [momentum, volume_surprise, overextension, liquidity]  # INFORMATIF, non
+                            # consommé : les checks sont câblés dans research.py
     scoring_matrix:
       w_momentum: 0.35          # mom 15m normalisé
       w_volume: 0.25            # surprise de volume (vs 24h)
@@ -45,7 +47,7 @@ paper:
 
 universe:
   exchange_env: AIDESK_EXCHANGE
-  exchanges_fallback: [binance, bybit, okx, kraken, gate]
+  exchanges_fallback: [binance, bybit, okx, kraken, gate]   # consommé (B6-D : wiring Settings→Feed)
   top_by_quote_volume: 40       # univers spot USDT de référence
   refresh_seconds: 60
 

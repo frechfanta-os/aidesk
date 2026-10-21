@@ -2,9 +2,13 @@ from __future__ import annotations
 
 import json
 import os
-import urllib.request
-import urllib.error
 from pathlib import Path
+
+# Breaker SKEPTIC : après DEAD_AFTER échecs consécutifs, fournisseur suspendu
+# COOLDOWN_S — une clé morte/quota vide ne peut jamais bloquer la boucle desk.
+DEAD_AFTER = 3
+COOLDOWN_S = 600.0
+_FAIL: dict[str, float] = {"n": 0, "until": 0.0}
 
 
 def _load_dotenv() -> None:
@@ -109,8 +113,3 @@ def critique(features_line: str, thesis: str) -> str | None:
             _FAIL["until"] = _time.time() + COOLDOWN_S
             _FAIL["n"] = 0
         return None
-
-
-DEAD_AFTER = 3
-COOLDOWN_S = 600.0
-_FAIL: dict[str, float] = {"n": 0, "until": 0.0}

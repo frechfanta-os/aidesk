@@ -9,7 +9,7 @@ python3 tools/watchdog.py &            # desk auto-relancé après crash
 python3 tools/dashboard.py &           # http://127.0.0.1:8787
 ```
 Variables du watchdog : `AIDESK_ARGS` (ex : `"--tick-seconds 60"`), `AIDESK_MAX_RESTARTS`,
-`AIDESK_WATCHDOG_COOLDOWN`. Tests : `python3 -m pytest tests/ -q` (25 tests).
+`AIDESK_WATCHDOG_COOLDOWN`. Tests : `python3 -m pytest tests/ -q` (80 tests).
 Avec systemd (hôte perso) :
 ```bash
 cp deploy/aidesk*.service /etc/systemd/system/

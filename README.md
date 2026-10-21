@@ -18,7 +18,7 @@ touch ctl/KILL                     # ferme tout et arrête le desk
 
 ## Exécution
 ```
-pip install ccxt pyyaml
+pip install ccxt pyyaml fastapi uvicorn openai httpx pytest
 python3 -m aidesk --tick-seconds 60        # run continu, HUD chaque heure
 python3 -m aidesk --hours 2 --quiet        # démo bornée, scoreboard final
 python3 -m aidesk --offline                # mode secours (random walk) si réseau coupé
@@ -56,7 +56,8 @@ Features `features_for_research()` prêtes pour la future integration RESEARCH d
 - **Watchdog** : `python3 tools/watchdog.py &` (auto-relance après crash ; `AIDESK_ARGS`,
   `AIDESK_MAX_RESTARTS`) — unités systemd prêtes dans `deploy/`.
 - **Rapport hebdo** : `python3 tools/report_week.py -o docs/REPORTS/<date>.md`.
-- **Tests** : `python3 -m pytest tests/ -q` (25 tests : broker, risk, matrice, research, head, restore, feed).
+- **Tests** : `python3 -m pytest tests/ -q` (80 tests : broker, risk, matrice, research, head,
+  restore, feed, dashboard, fraîcheur, skeptic, trésorerie, sessions, nettoyage).
 - **Runbook opérations** : `docs/RUNBOOK.md`.
 
 ## Site de suivi (GitHub Pages)

@@ -200,3 +200,51 @@ suivant du desk (lignes 12 trades historiques liront 'unknown', conservées).
 
 
 
+
+## B6 — Nettoyage P2 contrôlé (A→F) — **2026-10-21** ✅
+
+**A · broker.manage() + GATE_BY_FEATURES** : zéro référence dans le dépôt (grep à
+l'exécution) → supprimés. Incident d'édition survenu et réglé honnêtement : un
+oldString trop large a écrasé la tête de `target_price()` — inspecté (`sed`),
+réparé ; diff final = suppression de `manage()` seule, contrat TP/SL re-testé
+(`test_target_price_toujours_actif_apres_nettoyage`, vert).
+
+**B · llm.py** : `urllib.request/error` (morts) supprimés ; constantes breaker
+(`DEAD_AFTER=3, COOLDOWN_S=600, _FAIL`) remontées EN TÊTE de module avant usage
+(l'audit signalait la déclaration après `critique()`). Protocole fournisseur
+inchangé ; test dédié (`test_llm_module_imports_et_breaker_intacts`).
+
+**C · SQLite/journaux** : **index additifs** créés (`idx_trades_ts_close`,
+`idx_decisions_ts`, `CREATE INDEX IF NOT EXISTS` → appliqués à l'ouverture, testé
+sur base héritée). **WAL : NON activé — décision documentée** : écrivain unique
+(le desk), base ~94 Ko, lecteurs rares et ponctuels (report_week) ; le bénéfice
+de concurrence ne justifie pas la complexité backup/checkpoint. À revoir si des
+outils concurrents apparaissent ; test de restauration inclus. Rotation JSONL :
+non implémentée (reportée, limites déclarées — pas une suppression).
+
+**D · desk.yaml** : `universe.exchanges_fallback` désormais **câblé réel**
+(`Settings.fallbacks` → `Feed(fallbacks=…)` ; défaut `CORE_EXCHANGES` si clé
+absente ; tests wiring runtime). `radar.poll_seconds` et `research.checks` :
+vérifiés NON consommés par le code → annotés « INFORMATIF, non consommé » dans le
+yaml (conservés ; suppression laissée à un arbitrage utilisateur explicite).
+
+**E · README/RUNBOOK** : comptes de tests corrigés (25 → **80**, le chiffre réel
+de la suite) ; dépendances complétées (`pip install ccxt pyyaml fastapi uvicorn
+openai httpx pytest`) ; RUNBOOK aligné.
+
+**F · valorisation (MTM)** : `unrealized()` désormais **cohérent avec
+`PaperBroker.settle()`** — prix de sortie = last×(1−slippage_bps), frais sur
+proceeds (avant : frais seuls → ~5 bps optimistes). Distinction documentée en
+docstring : **valorisation indicative** (MTM, snapshot/dashboard) ≠ **PnL
+réalisé** (settle()/add_trade uniquement). Tests numériques : MTM ≡ cash du
+settle au même last (tolérance 2e-4 = arrondi 4 décimales), aucune écriture de
+PnL fantôme sur simple variation de ticker.
+
+**Tests ajoutés** — `tests/test_b6_cleanup.py`, 8 tests (3 échecs initiaux
+honnêtement diagnostiqués : seuils TP/SL calculés sur `ask`-entrée, tolérance
+d'arrondi 1e-6 trop serrée vs `round(...,4)`, `_snapshot()` écrit sans retour ;
+corrigés — assertions resserrées sur la réalité, code jamais affaibli).
+
+Suite complète : **80 passed in 14.35s**. Diff : 8 fichiers, +28/−28 ·
+`git diff --check` OK · scan secrets vide · aucune donnée trackée modifiée.
+Restart desk prévu après commit (MTM + fallbacks + index en production).

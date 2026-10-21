@@ -10,8 +10,6 @@ from .ledger import Ledger
 class PaperBroker:
     """Fills paper positions against the live snapshot with fee + slippage."""
 
-    GATE_BY_FEATURES = 0  # reserved
-
     def __init__(self, ledger: Ledger, settings: Settings) -> None:
         self.ledger = ledger
         self.s = settings
@@ -45,16 +43,6 @@ class PaperBroker:
         self.ledger.trades.append(trade)
         self.open.pop(pos.symbol, None)
         return trade
-
-    def manage(self, now: float) -> list[tuple[str, str]]:
-        """Returns (symbol, reason) of position closes to re-quote by feed;
-        price comes from caller, so this only marks them dirty."""
-        dirty: list[tuple[str, str]] = []
-        for sym, p in list(self.open.items()):
-            age = (now - p.ts_open) / 60.0
-            if age >= self.s.max_hold_minutes:
-                dirty.append((sym, "TIMEOUT"))
-        return dirty
 
     def target_price(self, sym: str, last: float) -> tuple[str, float] | None:
         """TP/SL evaluation against live last price."""

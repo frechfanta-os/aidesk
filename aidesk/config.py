@@ -74,6 +74,7 @@ class Settings:
     cooldown_h: int = 6
     dex_enabled: bool = False
     freshness_s: float = 300.0  # B2 : âge max d'une observation pour déclencher une entrée
+    fallbacks: list = None      # B6-D : exchanges de repli (desk.yaml universe)
     desk_agents: dict = None  # populated from desk.yaml at load
 
     @classmethod
@@ -113,6 +114,7 @@ class Settings:
             refresh_seconds=uv.get("refresh_seconds", 60),
             dex_enabled=bool(dx.get("enabled", False)),
             freshness_s=float(fd.get("freshness_s", 300.0)),
+            fallbacks=[str(e) for e in uv.get("exchanges_fallback", [])] or None,
         )
         desk_agents: dict[str, list[str]] = {}
         for desk, body in (cfg.get("desks") or {}).items():

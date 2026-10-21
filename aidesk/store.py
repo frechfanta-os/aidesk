@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS events (
 CREATE TABLE IF NOT EXISTS matrix_history (
   id INTEGER PRIMARY KEY AUTOINCREMENT, ts REAL, revision INTEGER, note TEXT
 );
+CREATE INDEX IF NOT EXISTS idx_trades_ts_close ON trades(ts_close);
+CREATE INDEX IF NOT EXISTS idx_decisions_ts ON decisions(ts);
 """
 
 

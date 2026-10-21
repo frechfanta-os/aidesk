@@ -32,7 +32,8 @@ class Desk:
         self.store = Store(db_path, jsonl)
         self.ledger = Ledger(settings.start_usdt)
         self.broker = PaperBroker(self.ledger, settings)
-        self.feed = Feed(offline=offline)
+        self.feed = Feed(offline=offline,
+                         fallbacks=getattr(settings, "fallbacks", None))
         src: dict[str, list[str]] = dict(DESK_NAMES)
         for desk, names in (getattr(self.s, "desk_agents", None) or {}).items():
             if names:
@@ -426,12 +427,17 @@ class Desk:
         print("───────────────────────────────────────\n")
 
     def unrealized(self) -> float:
-        """Mark-to-market paper value of still-open positions."""
+        """Valorisation INDICATIVE des positions ouvertes (B6-F).
+
+        Même math que PaperBroker.settle() : prix de sortie = last×(1−slippage),
+        frais sur proceeds. Le PnL RÉALISÉ, lui, ne vient que de settle()/add_trade.
+        """
         total = 0.0
         for sym, p in self.broker.open.items():
             f = self.last_feats.get(sym)
             last = f.last if f and f.last > 0 else p.entry
-            total += p.qty * last * (1 - self.s.fee_bps / 10_000)
+            total += p.qty * last * (1 - self.s.slippage_bps / 10_000) \
+            * (1 - self.s.fee_bps / 10_000)
         return round(total, 4)
 
     # ---------------------------------------------------------------- end
