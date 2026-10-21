@@ -39,7 +39,7 @@ class Desk:
                 src[desk] = list(names)
         self.agents = roster(src)
         self.by_name: dict[str, Agent] = {a.name: a for a in self.agents}
-        self.radar = Radar(self._desk("radar"))
+        self.radar = Radar(self._desk("radar"), fresh_s=settings.freshness_s)
         self.research = Research(self._desk("research"), matrix, self.store)
         self.risk = RiskAgent(settings, self.ledger)
         self.execd = ExecutionDesk(self._desk("execution"), self.broker, self.risk, self.store)
@@ -222,7 +222,10 @@ class Desk:
                 "ts": now_iso(),
                 "ticks": self.ticks,
                 "paused": self.paused,
-                "feed": {"offline": self.feed.offline, "name": self.feed.name},
+                "feed": {"offline": self.feed.offline, "name": self.feed.name,
+                         "ts": self.feed.last_ts() or None,
+                         "age_s": (round(time.time() - self.feed.last_ts())
+                                   if self.feed.last_ts() else None)},
                 "ledger": {
                     "start_usdt": self.ledger.start_usdt,
                     "wallet_usdt": round(self.ledger.wallet_usdt, 4),

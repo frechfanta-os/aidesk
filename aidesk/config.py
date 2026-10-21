@@ -73,6 +73,7 @@ class Settings:
     fires_below: float = 0.40
     cooldown_h: int = 6
     dex_enabled: bool = False
+    freshness_s: float = 300.0  # B2 : âge max d'une observation pour déclencher une entrée
     desk_agents: dict = None  # populated from desk.yaml at load
 
     @classmethod
@@ -91,6 +92,7 @@ class Settings:
         pp = cfg.get("paper", {})
         uv = cfg.get("universe", {})
         dx = cfg.get("dex", {})
+        fd = cfg.get("feed", {})
         settings = cls(
             take_profit=ex.get("take_profit", cls().take_profit),
             stop_loss=ex.get("stop_loss", cls().stop_loss),
@@ -110,6 +112,7 @@ class Settings:
             top_n=uv.get("top_by_quote_volume", 40),
             refresh_seconds=uv.get("refresh_seconds", 60),
             dex_enabled=bool(dx.get("enabled", False)),
+            freshness_s=float(fd.get("freshness_s", 300.0)),
         )
         desk_agents: dict[str, list[str]] = {}
         for desk, body in (cfg.get("desks") or {}).items():

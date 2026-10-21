@@ -115,6 +115,7 @@ class Feed:
             mom_1h=pct / 100.0,
             vol_surprise=1.0,
             range_pct=(hi - lo) / lo * 100 if lo else 0.0,
+            ts=time.time(),        # fraîcheur : l'observation vient d'être reçue (B2)
         )
 
     def _enrich(self, f: Features) -> None:
@@ -133,6 +134,7 @@ class Feed:
 
     # ---------- offline fallback (random walk demo) ----------
     def _offline_snapshot(self, top_n: int) -> dict[str, Features]:
+        now = time.time()
         syms = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT",
                 "DOGE/USDT", "ADA/USDT", "LINK/USDT"][:max(6, min(top_n, 12))]
         base = {"BTC/USDT": 80000, "ETH/USDT": 4000, "SOL/USDT": 180,
@@ -153,5 +155,10 @@ class Feed:
             out[s] = Features(symbol=s, last=px, bid=px * 0.9999, ask=px * 1.0001,
                               quote_volume_24h=qv, mom_15m=drift,
                               mom_1h=drift * r.uniform(1, 4),
-                              vol_surprise=vol_surprise, range_pct=0.8 + r.random())
+                              vol_surprise=vol_surprise, range_pct=0.8 + r.random(),
+                              ts=now)
         return out
+
+    def last_ts(self) -> float:
+        """Epoch du dernier rafraîchissement réussi (0.0 = jamais)."""
+        return self._last_refresh

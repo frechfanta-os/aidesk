@@ -52,3 +52,7 @@ universe:
 dex:
   enabled: false                # module memecoin expérimental: OFF en v0
   max_fraction_of_bank: 0.0
+
+feed:
+  freshness_s: 300              # B2 : âge max d'une observation ticker pour déclencher une
+                                # entrée (5× le refresh nominal de 60 s, enrich ~16 s inclus)

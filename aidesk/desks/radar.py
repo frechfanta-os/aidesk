@@ -9,8 +9,9 @@ COOLDOWN_S = 1800.0
 class Radar:
     """Three agents on rotation; each scan emits up to 3 candidate signals."""
 
-    def __init__(self, agents: list[Agent]) -> None:
+    def __init__(self, agents: list[Agent], fresh_s: float = 300.0) -> None:
         self.agents = agents
+        self.fresh_s = fresh_s      # âge max d'une observation pour entrer (B2)
         self.turn = 0
         self.last_signal: dict[str, float] = {}
         self.signals_emitted = 0
@@ -21,7 +22,8 @@ class Radar:
         self.turn += 1
         cands: list[Features] = []
         for sym, f in feats.items():
-            if sym in open_syms or not f.fresh or f.last <= 0:
+            # B2 : périmée / invalide / fraîcheur inconnue → jamais déclenchée
+            if sym in open_syms or not f.usable(now, self.fresh_s) or f.last <= 0:
                 continue
             if f.mom_15m <= 0.0008:                         # raw prefilter
                 continue
