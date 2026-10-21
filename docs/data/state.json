@@ -1,21 +1,21 @@
 {
- "ts": "2026-10-21T20:39:47Z",
- "ticks": 1,
+ "ts": "2026-10-21T22:07:36Z",
+ "ticks": 3,
  "paused": false,
  "feed": {
   "offline": false,
   "name": "binance",
-  "ts": 1792615161.0625908,
-  "age_s": 27
+  "ts": 1792620396.0547473,
+  "age_s": 60
  },
  "ledger": {
   "start_usdt": 30.0,
-  "wallet_usdt": 15.2814,
+  "wallet_usdt": 30.4798,
   "vault_usdt": 0.0,
-  "fees_paid": 0.1722,
-  "mtm_usdt": 14.9695,
-  "wins": 8,
-  "losses": 6,
+  "fees_paid": 0.2178,
+  "mtm_usdt": 0.0,
+  "wins": 11,
+  "losses": 8,
   "equity": [
    30.0,
    30.08,
@@ -31,47 +31,15 @@
    30.19,
    30.27,
    30.37,
-   30.31
+   30.31,
+   30.29,
+   30.26,
+   30.31,
+   30.39,
+   30.48
   ]
  },
- "positions": [
-  {
-   "symbol": "AVAX/USDT",
-   "entry": 9.882939,
-   "qty": 0.5731422606170087,
-   "usdt": 5.67,
-   "agent": "ROUTER",
-   "approver": "MEMORY-2",
-   "score": 0.806,
-   "ts_open": 1792610269.3738022,
-   "age_min": 82.0,
-   "last": 9.861
-  },
-  {
-   "symbol": "ETH/USDT",
-   "entry": 2499.6191849999996,
-   "qty": 0.0017025553434452457,
-   "usdt": 4.26,
-   "agent": "AGENT 01",
-   "approver": "MEMORY",
-   "score": 0.921,
-   "ts_open": 1792610288.970352,
-   "age_min": 81.6,
-   "last": 2494.97
-  },
-  {
-   "symbol": "ALT/USDT",
-   "entry": 0.013326659999999999,
-   "qty": 382.3088455772114,
-   "usdt": 5.1,
-   "agent": "EXEC",
-   "approver": "MEMORY",
-   "score": 0.818,
-   "ts_open": 1792615185.939987,
-   "age_min": 0.0,
-   "last": 0.01332
-  }
- ],
+ "positions": [],
  "trades_closed": [
   {
    "symbol": "BMT/USDT",
@@ -254,6 +222,71 @@
    "agent": "EXEC",
    "approver": "MEMORY",
    "score": 0.649
+  },
+  {
+   "symbol": "AVAX/USDT",
+   "entry": 9.882939,
+   "exit": 9.857069000000001,
+   "qty": 0.5731422606170087,
+   "pnl": -0.0261,
+   "reason": "TIMEOUT",
+   "ts_open": 1792610269.3738022,
+   "ts_close": 1792615806.5987837,
+   "agent": "ROUTER",
+   "approver": "MEMORY-2",
+   "score": 0.806
+  },
+  {
+   "symbol": "ETH/USDT",
+   "entry": 2499.6191849999996,
+   "exit": 2492.6530500000003,
+   "qty": 0.0017025553434452457,
+   "pnl": -0.0204,
+   "reason": "TIMEOUT",
+   "ts_open": 1792610288.970352,
+   "ts_close": 1792615806.6682181,
+   "agent": "AGENT 01",
+   "approver": "MEMORY",
+   "score": 0.921
+  },
+  {
+   "symbol": "ALT/USDT",
+   "entry": 0.013326659999999999,
+   "exit": 0.013483255000000001,
+   "qty": 382.3088455772114,
+   "pnl": 0.0496,
+   "reason": "TP",
+   "ts_open": 1792615185.939987,
+   "ts_close": 1792616166.5360734,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.818
+  },
+  {
+   "symbol": "PUMP/USDT",
+   "entry": 0.005149573499999999,
+   "exit": 0.0052103935,
+   "qty": 1470.4945953291087,
+   "pnl": 0.0742,
+   "reason": "TP",
+   "ts_open": 1792617028.6659656,
+   "ts_close": 1792618512.9468071,
+   "agent": "SNIPER",
+   "approver": "MEMORY-2",
+   "score": 0.688
+  },
+  {
+   "symbol": "ALT/USDT",
+   "entry": 0.013316655,
+   "exit": 0.013503245,
+   "qty": 570.1431778475901,
+   "pnl": 0.0911,
+   "reason": "TP",
+   "ts_open": 1792618813.085162,
+   "ts_close": 1792619289.8238897,
+   "agent": "ROUTER",
+   "approver": "MEMORY-2",
+   "score": 0.701
   }
  ],
  "agents": [
@@ -288,35 +321,35 @@
    "name": "MEMORY",
    "desk": "research",
    "budget": 1.0,
-   "score": 0.3,
-   "wins": 4,
-   "losses": 4,
-   "rev": "v1"
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v2"
   },
   {
    "name": "MEMORY-2",
    "desk": "research",
    "budget": 1.2,
-   "score": 0.6,
-   "wins": 4,
-   "losses": 2,
+   "score": 0.65,
+   "wins": 6,
+   "losses": 3,
    "rev": "v1"
   },
   {
    "name": "EXEC",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.4,
-   "wins": 2,
+   "score": 0.5,
+   "wins": 3,
    "losses": 2,
    "rev": "v1"
   },
   {
    "name": "SNIPER",
    "desk": "execution",
-   "budget": 1.0,
-   "score": 0.55,
-   "wins": 2,
+   "budget": 1.2,
+   "score": 0.65,
+   "wins": 3,
    "losses": 1,
    "rev": "v1"
   },
@@ -324,18 +357,18 @@
    "name": "ROUTER",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.7,
-   "wins": 2,
-   "losses": 0,
+   "score": 0.65,
+   "wins": 3,
+   "losses": 1,
    "rev": "v1"
   },
   {
    "name": "AGENT 01",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.7,
+   "score": 0.55,
    "wins": 2,
-   "losses": 0,
+   "losses": 1,
    "rev": "v1"
   },
   {
@@ -385,30 +418,30 @@
   }
  ],
  "matrix": {
-  "pass_threshold": 0.634,
-  "min_momentum": 0.0023,
-  "min_vol_surprise": 1.55,
+  "pass_threshold": 0.636,
+  "min_momentum": 0.0027,
+  "min_vol_surprise": 1.5,
   "max_momentum_1h": 0.06,
-  "revisions": 7
+  "revisions": 10
  },
  "risk": {
-  "blocks": 1,
+  "blocks": 0,
   "day_pnl": 0.0,
   "day_frozen": false,
   "frozen_treasury": false
  },
  "counters": {
-  "signals": 3,
-  "decisions": 3,
-  "entries": 1,
+  "signals": 0,
+  "decisions": 0,
+  "entries": 0,
   "postmortems": 0,
   "promotions": 0,
   "firings": 0
  },
  "snapshot_meta": {
-  "snapshot_ts": "2026-10-21 20:39:51 UTC",
+  "snapshot_ts": "2026-10-21 22:07:41 UTC",
   "events_kept": 70,
-  "net": 30.25,
-  "trades": 14
+  "net": 30.48,
+  "trades": 19
  }
 }

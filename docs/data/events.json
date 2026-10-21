@@ -1,140 +1,6 @@
 {
  "events": [
   {
-   "kind": "decision",
-   "note": "AAVE/USDT refus\u00e9 score 0.62 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SOL/USDT refus\u00e9 score 0.78 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SUI/USDT refus\u00e9 score 0.59 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SNDKB/USDT refus\u00e9 score 0.55 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ADA/USDT refus\u00e9 score 0.46 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "LTC/USDT refus\u00e9 score 0.65 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "restore",
-   "note": ""
-  },
-  {
-   "kind": "boot",
-   "note": "mode ccxt:binance \u00b7 banque $30.0"
-  },
-  {
-   "kind": "decision",
-   "note": "QNT/USDT achet\u00e9 score 0.78 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "QNT/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "LTC/USDT refus\u00e9 score 0.70 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "AAVE/USDT refus\u00e9 score 0.55 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "NEAR/USDT refus\u00e9 score 0.76 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ZEC/USDT refus\u00e9 score 0.71 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SOL/USDT refus\u00e9 score 0.72 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "XRP/USDT refus\u00e9 score 0.76 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "DOGE/USDT refus\u00e9 score 0.67 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ENA/USDT refus\u00e9 score 0.69 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "restore",
-   "note": ""
-  },
-  {
-   "kind": "boot",
-   "note": "mode ccxt:binance \u00b7 banque $30.0"
-  },
-  {
-   "kind": "decision",
-   "note": "ALT/USDT achet\u00e9 score 0.86 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "ALT/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "CRCLB/USDT refus\u00e9 score 0.70 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "STRK/USDT refus\u00e9 score 0.56 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "LINK/USDT refus\u00e9 score 0.48 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ZEC/USDT refus\u00e9 score 0.61 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "BTC/USDT refus\u00e9 score 0.51 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SNDKB/USDT refus\u00e9 score 0.59 (MEMORY)",
-   "verdict": false
-  },
-  {
    "kind": "restore",
    "note": ""
   },
@@ -324,6 +190,128 @@
   {
    "kind": "risk_block",
    "note": "TRUMP/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "QNT/USDT refus\u00e9 score 0.65 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "LINK/USDT achet\u00e9 score 0.88 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "LINK/USDT \u2014 gel tr\u00e9sorerie"
+  },
+  {
+   "kind": "decision",
+   "note": "STRK/USDT refus\u00e9 score 0.66 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "INJ/USDT refus\u00e9 score 0.44 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "trade",
+   "note": "PERTE "
+  },
+  {
+   "kind": "postmortem",
+   "note": "PERTE AVAX/USDT -0.0261 $ en 92 min | TIMEOUT | mom15@entr\u00e9e -0.14 % | vol \u00d71.1 | agent ROUTER/MEMORY-2"
+  },
+  {
+   "kind": "trade",
+   "note": "PERTE "
+  },
+  {
+   "kind": "postmortem",
+   "note": "PERTE ETH/USDT -0.0204 $ en 92 min | TIMEOUT | mom15@entr\u00e9e -0.06 % | vol \u00d70.3 | agent AGENT 01/MEMORY"
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN ALT/USDT +0.0496 $ en 16 min | TP | mom15@entr\u00e9e +0.22 % | vol \u00d71.5 | agent EXEC/MEMORY"
+  },
+  {
+   "kind": "decision",
+   "note": "SPCXB/USDT refus\u00e9 score 0.65 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ALT/USDT refus\u00e9 score 0.52 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "PUMP/USDT achet\u00e9 score 0.69 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "PUMP/USDT $7.58 @ 0.005149573499999999 \u2014 SNIPER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "TRUMP/USDT refus\u00e9 score 0.42 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN PUMP/USDT +0.0742 $ en 25 min | TP | mom15@entr\u00e9e +0.66 % | vol \u00d70.7 | agent SNIPER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "ALT/USDT achet\u00e9 score 0.70 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "ALT/USDT $7.6 @ 0.013316655 \u2014 ROUTER/MEMORY-2"
+  },
+  {
+   "kind": "head_review",
+   "note": "PROMOTION SNIPER (execution) \u2192 budget \u00d71.2 (score 0.65, 3W/1L)"
+  },
+  {
+   "kind": "head_review",
+   "note": "LICENCIEMENT MEMORY (research) v1 \u2192 v2 (score 0.50) \u2014 reprogrammation par AUDIT"
+  },
+  {
+   "kind": "head_review",
+   "note": "PROMOTION SNIPER (execution) \u2192 budget \u00d71.2 (score 0.65, 3W/1L) \u00b7 LICENCIEMENT MEMORY (research) v1 \u2192 v2 (score 0.50) \u2014 r"
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN ALT/USDT +0.0911 $ en 8 min | TP | mom15@entr\u00e9e +1.35 % | vol \u00d71.0 | agent ROUTER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "TRUMP/USDT refus\u00e9 score 0.62 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "restore",
+   "note": ""
+  },
+  {
+   "kind": "boot",
+   "note": "mode ccxt:binance \u00b7 banque $30.0"
   }
  ]
 }
