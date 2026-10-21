@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-10-21T22:01:15Z",
+  "csv_sha256": "2a6f434210b7fa4ea1d30c953f83a1ce2016ecce3656f634fc279b49196557e4",
+  "rows": 19,
+  "by_mode": {
+    "unknown": 13,
+    "live": 6
+  },
+  "wins": 11,
+  "losses": 8,
+  "net_pnl": 0.4797,
+  "mode_column_in_db": true,
+  "warning": "DONNÉES PAPER EXPÉRIMENTALES — échantillon insuffisant, aucune garantie de performance future ; ne constitue pas une information financière."
+}
