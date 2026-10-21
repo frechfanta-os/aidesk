@@ -1,108 +1,6 @@
 {
  "events": [
   {
-   "kind": "risk_block",
-   "note": "ENA/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "HYPE/USDT refus\u00e9 score 0.69 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "AAVE/USDT refus\u00e9 score 0.55 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "NEAR/USDT achet\u00e9 score 0.83 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "NEAR/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "ZEC/USDT achet\u00e9 score 0.80 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "ZEC/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "ARB/USDT achet\u00e9 score 0.65 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "ARB/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "SPCXB/USDT refus\u00e9 score 0.74 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "UNI/USDT refus\u00e9 score 0.57 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ETH/USDT achet\u00e9 score 0.96 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "ETH/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "TAO/USDT achet\u00e9 score 0.81 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "TAO/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "DOGE/USDT achet\u00e9 score 0.75 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "DOGE/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "QNT/USDT achet\u00e9 score 0.69 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "QNT/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "BNB/USDT refus\u00e9 score 0.73 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "LINK/USDT refus\u00e9 score 0.56 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "LTC/USDT refus\u00e9 score 0.61 (MEMORY)",
-   "verdict": false
-  },
-  {
    "kind": "decision",
    "note": "SOL/USDT refus\u00e9 score 0.73 (MEMORY-2)",
    "verdict": false
@@ -320,6 +218,101 @@
   {
    "kind": "decision",
    "note": "BNB/USDT refus\u00e9 score 0.61 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN AVAX/USDT +0.0491 $ en 39 min | TP | mom15@entr\u00e9e +0.51 % | vol \u00d72.4 | agent AGENT 01/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "AVAX/USDT achet\u00e9 score 0.73 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "AVAX/USDT $4.92 @ 9.941968499999998 \u2014 AGENT 03/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "WLD/USDT refus\u00e9 score 0.62 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ADA/USDT achet\u00e9 score 0.82 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ADA/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "BTC/USDT achet\u00e9 score 0.82 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "BTC/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "restore",
+   "note": ""
+  },
+  {
+   "kind": "boot",
+   "note": "mode ccxt:binance \u00b7 banque $30.0"
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN MSTRB/USDT +0.0720 $ en 142 min | TP | mom15@entr\u00e9e +0.05 % | vol \u00d72.5 | agent SNIPER/MEMORY-2"
+  },
+  {
+   "kind": "trade",
+   "note": "PERTE "
+  },
+  {
+   "kind": "postmortem",
+   "note": "PERTE UNI/USDT -0.0507 $ en 107 min | TIMEOUT | mom15@entr\u00e9e +0.25 % | vol \u00d70.6 | agent AGENT 02/MEMORY"
+  },
+  {
+   "kind": "trade",
+   "note": "PERTE "
+  },
+  {
+   "kind": "postmortem",
+   "note": "PERTE AVAX/USDT -0.0389 $ en 102 min | TIMEOUT | mom15@entr\u00e9e +0.00 % | vol \u00d71.6 | agent AGENT 03/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "ZEC/USDT achet\u00e9 score 0.79 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "ZEC/USDT $7.54 @ 1351.85559 \u2014 EXEC/MEMORY"
+  },
+  {
+   "kind": "decision",
+   "note": "CRCLB/USDT achet\u00e9 score 0.70 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "CRCLB/USDT $5.65 @ 91.34564999999999 \u2014 SNIPER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "PEPE/USDT refus\u00e9 score 0.77 (MEMORY)",
    "verdict": false
   }
  ]
