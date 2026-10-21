@@ -256,3 +256,9 @@ Index `idx_trades_ts_close`/`idx_decisions_ts` créés sur la DB réelle ;
 répartition modes : `live 1 · unknown 13` (aucune donnée réécrite).
 Dashboard HTTP 200. Aucune donnée détruite ; backup pré-migration conservé
 (`aidesk.db.bak-avant-B5`).
+
+### Correction comptable — **2026-10-21 21:5x**
+Le message du commit de snapshot `d5a7e10` indiquait « 9W/5L » : **FAUX**.
+Vérité SQLite : 14 trades = **8W/6L**, PnL net réalisé **+0.3113 $**.
+Historique poussé NON réécrit (jamais de force-push sur main) ; le présent
+correctif fait foi. Le rapport final Phase B utilise les chiffres vérifiés.
