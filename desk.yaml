@@ -1,0 +1,54 @@
+head:
+  name: GROK CORE
+  reviews_every_h: 1
+  fires_below_score: 0.40
+  cooldown_h: 6
+
+desks:
+  radar:
+    agents: [SCOUT, FEED, SIGNAL]
+    poll_seconds: { SCOUT: 15, FEED: 45, SIGNAL: 30 }
+  research:
+    agents: [MEMORY, MEMORY-2]
+    checks: [momentum, volume_surprise, overextension, liquidity]
+    scoring_matrix:
+      w_momentum: 0.35          # mom 15m normalisé
+      w_volume: 0.25            # surprise de volume (vs 24h)
+      w_overext: 0.20           # pénalité d'overextension (mom 1h trop dur)
+      w_liquidity: 0.20         # profondeur du ticker (quote volume)
+      min_momentum: 0.0015      # +0.15 % en 15 min minimum
+      max_momentum_1h: 0.06     # ne pas acheter des fusées déjà à +6 %/1h
+      min_vol_surprise: 1.5     # volume 15m >= 1.5x le rythme 24h
+      min_quote_volume: 5_000_000  # $ sur 24h (core spot)
+      pass_threshold: 0.62
+  execution:
+    agents: [EXEC, SNIPER, ROUTER, AGENT 01, AGENT 02, AGENT 03]
+    take_profit: 0.012          # +1.2 %
+    stop_loss: -0.008           # −0.8 %
+    max_hold_minutes: 90
+  risk:
+    max_position_fraction: 0.25
+    max_open_positions: 3
+    max_entries_per_hour: 6
+    daily_loss_stop: -0.10      # stop -10 % du start → gel du jour
+  audit:
+    agents: [HEDGE, AUDIT-2]
+  treasury:
+    agents: [VAULT]
+    sweep_every_h: 24
+    freeze_below_start_fraction: 0.60
+
+paper:
+  start_usdt: 30.00             # votre risque max déclaré
+  fee_bps: 10                   # 0.1 % par côté
+  slippage_bps: 5
+
+universe:
+  exchange_env: AIDESK_EXCHANGE
+  exchanges_fallback: [binance, bybit, okx, kraken, gate]
+  top_by_quote_volume: 40       # univers spot USDT de référence
+  refresh_seconds: 60
+
+dex:
+  enabled: false                # module memecoin expérimental: OFF en v0
+  max_fraction_of_bank: 0.0

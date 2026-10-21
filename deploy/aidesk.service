@@ -1,0 +1,17 @@
+[Unit]
+Description=AIDESK desk multi-agents (boucle watchdog)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/aidesk
+ExecStart=/usr/local/bin/python3 tools/watchdog.py
+Restart=always
+RestartSec=15
+Environment=PYTHONUNBUFFERED=1
+# borne automatique des pannes : décommenter pour plafonner
+# Environment=AIDESK_MAX_RESTARTS=100
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+# secrets & état local — JAMAIS de commit
+.env
+*.db
+*.db-journal
+# (ancrés à la racine : docs/data/ du site reste publiable)
+/state.json
+/state.json.tmp
+/events.jsonl
+/whale.db
+__pycache__/
+*.pyc
+.venv/
+
+*.out
+/ctl/
+.pytest_cache/
+tests/.pytest_cache/

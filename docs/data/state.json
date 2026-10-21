@@ -1,0 +1,244 @@
+{
+ "ts": "2026-10-21T15:36:59Z",
+ "ticks": 37,
+ "paused": false,
+ "feed": {
+  "offline": false,
+  "name": "binance"
+ },
+ "ledger": {
+  "start_usdt": 30.0,
+  "wallet_usdt": 14.5796,
+  "vault_usdt": 0.0,
+  "fees_paid": 0.0391,
+  "mtm_usdt": 15.5953,
+  "wins": 2,
+  "losses": 0,
+  "equity": [
+   30.0,
+   30.08,
+   30.12
+  ]
+ },
+ "positions": [
+  {
+   "symbol": "MSTRB/USDT",
+   "entry": 152.005965,
+   "qty": 0.036935261060314306,
+   "usdt": 5.62,
+   "agent": "SNIPER",
+   "approver": "MEMORY-2",
+   "score": 0.682,
+   "ts_open": 1792594730.9451737,
+   "age_min": 38.1,
+   "last": 153.43
+  },
+  {
+   "symbol": "AVAX/USDT",
+   "entry": 9.8159055,
+   "qty": 0.5149743953830851,
+   "usdt": 5.06,
+   "agent": "AGENT 01",
+   "approver": "MEMORY-2",
+   "score": 0.769,
+   "ts_open": 1792594779.1816692,
+   "age_min": 37.3,
+   "last": 9.911
+  },
+  {
+   "symbol": "UNI/USDT",
+   "entry": 7.645821,
+   "qty": 0.6350057109628908,
+   "usdt": 4.86,
+   "agent": "AGENT 02",
+   "approver": "MEMORY",
+   "score": 0.918,
+   "ts_open": 1792596844.8444507,
+   "age_min": 2.9,
+   "last": 7.622
+  }
+ ],
+ "trades_closed": [
+  {
+   "symbol": "BMT/USDT",
+   "entry": 0.024342165,
+   "exit": 0.024637675,
+   "qty": 307.79924464401586,
+   "pnl": 0.0759,
+   "reason": "TP",
+   "ts_open": 1792594729.440295,
+   "ts_close": 1792594779.1345105,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.716
+  },
+  {
+   "symbol": "CRCLB/USDT",
+   "entry": 89.66481,
+   "exit": 90.77459,
+   "qty": 0.047017107380253186,
+   "pnl": 0.0437,
+   "reason": "TP",
+   "ts_open": 1792594732.5642316,
+   "ts_close": 1792596844.719521,
+   "agent": "ROUTER",
+   "approver": "MEMORY",
+   "score": 0.771
+  }
+ ],
+ "agents": [
+  {
+   "name": "SCOUT",
+   "desk": "radar",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "FEED",
+   "desk": "radar",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "SIGNAL",
+   "desk": "radar",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "MEMORY",
+   "desk": "research",
+   "budget": 1.0,
+   "score": 0.7,
+   "wins": 2,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "MEMORY-2",
+   "desk": "research",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "EXEC",
+   "desk": "execution",
+   "budget": 1.0,
+   "score": 0.6,
+   "wins": 1,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "SNIPER",
+   "desk": "execution",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "ROUTER",
+   "desk": "execution",
+   "budget": 1.0,
+   "score": 0.6,
+   "wins": 1,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "AGENT 01",
+   "desk": "execution",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "AGENT 02",
+   "desk": "execution",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "AGENT 03",
+   "desk": "execution",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "HEDGE",
+   "desk": "audit",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "AUDIT-2",
+   "desk": "audit",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  },
+  {
+   "name": "VAULT",
+   "desk": "treasury",
+   "budget": 1.0,
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v1"
+  }
+ ],
+ "matrix": {
+  "pass_threshold": 0.62,
+  "min_momentum": 0.0015,
+  "min_vol_surprise": 1.5,
+  "max_momentum_1h": 0.06,
+  "revisions": 0
+ },
+ "risk": {
+  "blocks": 26,
+  "day_pnl": 0.1196,
+  "day_frozen": false,
+  "frozen_treasury": false
+ },
+ "counters": {
+  "signals": 49,
+  "decisions": 49,
+  "entries": 5,
+  "postmortems": 2,
+  "promotions": 0,
+  "firings": 0
+ },
+ "snapshot_meta": {
+  "snapshot_ts": "2026-10-21 15:37:31 UTC",
+  "events_kept": 70,
+  "net": 30.17,
+  "trades": 2
+ }
+}

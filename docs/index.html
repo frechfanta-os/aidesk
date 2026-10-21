@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIDESK — desk multi-agents (paper) · vue spectacle</title>
+<style>
+:root{--bg:#0a0d10;--pnl0:#0e1416;--fg:#d8e3e3;--dim:#5a6a6a;--brd:#1d2a2a;
+ --grn:#6dffb0;--red:#ff6e6e;--amb:#ffd28a;--blu:#8fb7ff;--cy:#7fe6e0;--vi:#c9a6ff}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);margin:0;
+ font:13px/1.5 "SFMono-Regular",JetBrains Mono,Menlo,Consolas,monospace}
+a{color:var(--blu);text-decoration:none}a:hover{text-decoration:underline}
+header{display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;
+ padding:12px 16px;border-bottom:1px solid var(--brd)}
+header h1{margin:0;font-size:17px;color:var(--grn);letter-spacing:2px;font-weight:700}
+.sub{color:var(--dim)}
+main{padding:16px;max-width:1180px;margin:0 auto}
+section{margin-bottom:26px}
+h2{font-size:12px;color:var(--dim);letter-spacing:2px;margin:0 0 8px;
+ border-bottom:1px dashed var(--brd);padding-bottom:6px;text-transform:uppercase}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.card{background:var(--pnl0);border:1px solid var(--brd);border-radius:6px;padding:10px 12px}
+.card .k{color:var(--dim);font-size:11px;letter-spacing:1px}
+.card .v{font-size:19px;font-weight:700;margin-top:2px}
+.up{color:var(--grn)}.dn{color:var(--red)}.am{color:var(--amb)}.cy{color:var(--cy)}
+.seats{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px}
+.seat{background:var(--pnl0);border:1px solid var(--brd);border-radius:6px;padding:8px 10px}
+.seat b{font-size:13px}
+.seat .r{color:var(--dim);font-size:10px;letter-spacing:1px}
+.badge{display:inline-block;border:1px solid var(--brd);border-radius:10px;
+ padding:0 7px;font-size:10px;color:var(--dim);margin-left:6px}
+.b-w{border-color:#2f5f47;color:var(--grn)}.b-l{border-color:#5f2f39;color:var(--red)}
+.b-prom{border-color:#4a5f8f;color:var(--blu)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{color:var(--dim);text-align:left;border-bottom:1px solid var(--brd);padding:4px 8px;
+ font-size:11px;letter-spacing:1px}
+td{padding:5px 8px;border-bottom:1px solid #142020}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+.ticker{height:230px;overflow:auto;background:var(--pnl0);border:1px solid var(--brd);
+ border-radius:6px;padding:8px 10px;font-size:12px}
+.tk{display:flex;gap:10px;padding:2px 0;border-bottom:1px dashed #142020}
+.tk .t{color:var(--dim);white-space:nowrap}
+.tag{min-width:74px;text-align:center;border:1px solid var(--brd);border-radius:10px;
+ font-size:10px;padding:0 6px;white-space:nowrap}
+.g-entry{color:var(--grn);border-color:#2f5f47}.g-trade{color:var(--cy);border-color:#3d6b66}
+.g-risk_block{color:var(--amb);border-color:#5f5030}.g-decision{color:var(--dim)}
+.g-postmortem{color:var(--vi);border-color:#4f3f66}.g-restore,.g-boot{color:var(--blu)}
+.g-head_review{color:var(--blu)}
+.bar{height:6px;background:#16211f;border-radius:3px;overflow:hidden;margin:6px 0 2px}
+.bar i{display:block;height:100%;background:var(--grn)}
+.bar.mid i{background:var(--amb)}.bar.lock i{background:#3a4442}
+.step{margin:10px 0;font-size:12.5px}
+.step .st{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.step .pct{color:var(--dim);font-size:11px}
+.gate{color:var(--amb);font-size:11px;margin-top:2px}
+.done{color:var(--grn)}.run{color:var(--amb)}.todo{color:var(--dim)}
+#mode{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button{background:#101a18;color:var(--grn);border:1px solid #2f5f47;border-radius:5px;
+ padding:5px 12px;font:inherit;cursor:pointer}
+button:hover{background:#152420}
+button.warn{border-color:#5f2f39;color:var(--red)}
+input{background:#0e1416;border:1px solid var(--brd);border-radius:5px;color:var(--fg);
+ padding:5px 8px;font:inherit;width:min(340px,60vw)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block}
+.dot.ok{background:var(--grn)}.dot.wait{background:var(--amb)}
+footer{border-top:1px solid var(--brd);color:var(--dim);padding:14px 16px;font-size:11.5px;
+ display:flex;flex-wrap:wrap;gap:14px}
+.svgbox{background:var(--pnl0);border:1px solid var(--brd);border-radius:6px;padding:10px}
+</style></head>
+<body>
+<header>
+  <h1>AIDESK</h1>
+  <span class="sub">desk multi-agents · paper-trading · données de marché réelles</span>
+  <span class="badge" style="margin-left:auto" id="modeBadge">SNAPSHOT</span>
+  <span class="badge" id="tsBadge">—</span>
+</header>
+<main>
+
+<section>
+  <h2>Vue d'ensemble</h2>
+  <div class="kpis" id="kpis"></div>
+</section>
+
+<section>
+  <h2>Courbe d'équité (net de frais)</h2>
+  <div class="svgbox"><svg id="eq" width="100%" height="120" viewBox="0 0 900 120" preserveAspectRatio="none"></svg></div>
+</section>
+
+<section>
+  <h2>Les 14 seats</h2>
+  <div class="seats" id="seats"></div>
+</section>
+
+<section>
+  <h2>Positions ouvertes</h2>
+  <div id="posWrap"></div>
+</section>
+
+<section>
+  <h2>Fills &amp; journal (ticker)</h2>
+  <div class="ticker" id="ticker"></div>
+</section>
+
+<section>
+  <h2>Spectateur live — connecter un desk</h2>
+  <div id="mode">
+    <input id="base" placeholder="http://127.0.0.1:8787" value="http://127.0.0.1:8787">
+    <button id="btnConnect">CONNECT</button>
+    <button id="btnSnap" class="warn">REVENIR AU SNAPSHOT</button>
+    <span class="dot" id="liveDot"></span><span class="sub" id="liveMsg">
+    Le live exige que le desk tourne et soit joignable ici (SSH&nbsp;: <code>ssh -L 8787:localhost:8787 vps</code>).</span>
+  </div>
+</section>
+
+<section>
+  <h2>Roadmap (progression honnête)</h2>
+  <div id="road"></div>
+</section>
+
+<section>
+  <h2>Développement (dernier commit)</h2>
+  <div class="card" id="gh">chargement via api.github.com… (public)
+  </div>
+</section>
+
+</main>
+<footer>
+  <a href="https://github.com/frechfanta-os/aidesk" target="_blank">code</a>
+  <a href="https://github.com/frechfanta-os/aidesk/commits/main" target="_blank">commits</a>
+  <a href="https://github.com/frechfanta-os/aidesk/blob/main/docs/ROADMAP.md" target="_blank">ROADMAP.md</a>
+  <a href="https://github.com/frechfanta-os/aidesk/blob/main/docs/RUNBOOK.md" target="_blank">RUNBOOK.md</a>
+  <span id="builtTs" style="white-space:nowrap">page publiée par tools/build_site.py — reflète le desk au moment du push</span>
+  <span>paper uniquement · le LLM n'exécute jamais d'ordre · pas de promesse de performance</span>
+</footer>
+
+<script>
+const ROADMAP = [
+ {t:"M2 — v1.0 PAPER stable (watchdog, 26 tests, rapport hebdo, RADAR 40 paires)",p:100,c:"done",
+  g:"livré ✓"},
+ {t:"Phase 1 — Preuve statistique (≥30 trades, espérance nette >0, drawdown <15 %)",p:25,c:"run",
+  g:"en cours — collecte 2-4 semaines · et si l'espérance < 0 : retour au tuning, pas au capital"},
+ {t:"Phase 2 — Micro-capital réel $10-30 (clé trade-only, réconciliation, drill d'échecs)",p:0,c:"todo",
+  g:"porté GO obligatoire : espérance > 0 sur 14 jours + drawdown < 15 %"},
+ {t:"Phase 3 — Robustesse & extensions (websocket, backtest, DEX whales*, alertes)",p:0,c:"todo",
+  g:"*gated par le CEX core · app mobile : rapport réplica obligatoire avant"},
+ {t:"V1.0 — Finalisation (repo, RUNBOOK, backups, 10+ trades réels)",p:0,c:"todo",
+  g:"arrêt propre documenté si pas d'edge"}
+];
+
+function fmt(x,d=2){return (x==null?"—":"$"+Number(x).toFixed(d));}
+function pct(w,l){const t=w+l;return t?Math.round(100*w/t)+" %":"—";}
+function colorize(v){return v>0?"<span class='up'>"+fmt(v)+"</span>"
+ :v<0?"<span class='dn'>"+fmt(v)+"</span>":"<span class='am'>"+fmt(v)+"</span>";}
+
+function renderKpis(D){
+  const L=D.ledger||{}, M=D.matrix||{}, C=D.counters||{}, P=D.positions||[],
+        R=D.risk||{}, meta=D.snapshot_meta||{};
+  const net=(L.wallet_usdt??0)+(L.mtm_usdt??0);
+  const pnl=net-(L.start_usdt??30);
+  const wr=(L.wins??0)+(L.losses??0);
+  const kpis=[
+   ["NET (cash+MTM)",fmt(net),pnl>=0?"up":"dn"],
+   ["BANQUE CASH",fmt(L.wallet_usdt??L.wallet,2),""],
+   ["MTM OUVERT",fmt(L.mtm_usdt,2),""],
+   ["P&L NET",fmt(pnl),pnl>=0?"up":"dn"],
+   ["WINRATE",wr?pct(L.wins??0,L.losses??0):"—",""],
+   ["TRADES FERMÉS",String((D.trades_closed||[]).length),""],
+   ["SEATS OUVERTS",P.length+" / "+(R.max_open_positions??3),P.length?"am":"cy"],
+   ["MATRICE","rev "+(M.revisions??0),"cy"],
+   ["TICKS",String(D.ticks??0),""],
+   ["FEED",(D.feed&&D.feed.name?D.feed.name:"—")+(D.feed&&D.feed.offline?" (démo)":""),"cy"],
+   ["POST-MORTEMS",String(C.postmortems??0),""],
+   ["ENTRÉES",String(C.entries??0),""],
+  ];
+  document.getElementById("kpis").innerHTML=kpis.map(([k,v,c])=>
+   `<div class="card"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`).join("");
+  drawEquity(L.equity||[]);
+  document.getElementById("tsBadge").textContent=
+    meta.snapshot_ts?("SNAPSHOT "+meta.snapshot_ts):(D.ts||"—");
+}
+
+function drawEquity(series){
+  const svg=document.getElementById("eq");
+  if(!series||series.length<2){svg.innerHTML=
+   `<text x="20" y="45" fill="#5a6a6a" font-size="11">courbe : 1+ points dès le 2e trade clôturé… patience</text>`;return;}
+  const lo=Math.min(...series),hi=Math.max(...series),span=(hi-lo)||1;
+  const w=900,h=110,pad=8;
+  const pts=series.map((v,i)=>[
+    pad+i*(w-2*pad)/(series.length-1),
+    h-pad-(v-lo)/span*(h-2*pad)]);
+  svg.innerHTML=
+   `<polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none"
+      stroke="#6dffb0" stroke-width="2" transform="translate(0,5)"/>
+    <text x="${w-4}" y="${pad+4}" fill="#5a6a6a" font-size="10" text-anchor="end">
+      max ${hi.toFixed(2)} $ · min ${lo.toFixed(2)} $</text>`;
+}
+
+function renderSeats(D){
+  const ags=D.agents||[];
+  document.getElementById("seats").innerHTML=ags.map(a=>{
+   const t=a.wins+a.losses;
+   const b=t?`<span class="badge ${a.wins>=a.losses?"b-w":"b-l"}">${a.wins}W/${a.losses}L</span>`:"";
+   const rev=a.rev&&a.rev!=="v1"?`<span class="badge b-prom">${a.rev}</span>`:"";
+   const bud=a.budget>1?`<span class="badge b-prom">×${a.budget}</span>`:"";
+   return `<div class="seat"><b>${a.name}</b>${b}${rev}${bud}
+     <div class="r">${a.desk||""}</div>
+     <div class="r">score ${(a.score??0.5).toFixed(2)}</div></div>`;
+  }).join("");
+}
+
+function renderPositions(D){
+  const P=D.positions||[];
+  if(!P.length){document.getElementById("posWrap").innerHTML=
+   `<div class="card sub">aucune position ouverte — le desk attend ses critères.</div>`;return;}
+  document.getElementById("posWrap").innerHTML=
+   `<table><tr><th>sym</th><th>agent</th><th>entry</th><th>last</th><th class="n">MTM</th>
+    <th>âge</th><th>score</th></tr>`+P.map(p=>{
+    const last=p.last||p.entry, mtm=(last-p.entry)*p.qty;
+    return `<tr><td><b>${p.symbol}</b></td><td>${p.agent||""}</td>
+     <td class="n">${p.entry.toFixed(6)}</td><td class="n">${last.toFixed(6)}</td>
+     <td class="n">${colorize(mtm)}</td><td>${(p.age_min??0).toFixed(0)} min</td>
+     <td class="n">${(p.score??0).toFixed(3)}</td></tr>`;
+   }).join("")+"</table>";
+}
+
+function renderTicker(events){
+  const T=document.getElementById("ticker");
+  if(!events||!events.length){T.innerHTML=`<div class="sub">aucun événement…</div>`;return;}
+  T.innerHTML=events.map(e=>{
+   const cls="g-"+String(e.kind||"");
+   return `<div class="tk"><span class="t">${e.ts||""}</span>
+     <span class="tag ${cls}">${e.kind}</span><span>${(e.note||"").replace(/</g,"&lt;")}</span></div>`;
+  }).reverse().join("");
+}
+
+function renderRoad(){
+  document.getElementById("road").innerHTML=ROADMAP.map(r=>
+   `<div class="step"><div class="st"><span class="${r.c}">${r.t}</span>
+     <span class="pct">${r.p} %</span></div>
+    <div class="bar ${r.p===100?"":(r.p===0?"lock":(r.p<60?"mid":""))}">
+     <i style="width:${Math.max(r.p,2)}%"></i></div>
+    <div class="gate">${r.g}</div></div>`).join("");
+}
+
+async function loadFetch(mode, base){
+  try{
+    const url=mode==="live"?strip(base):location.href.replace(/[^/]*$/,"");
+    const [st,evs]=await Promise.all([
+      fetch(url+"data/state.json").then(r=>r.json()),
+      fetch(url+"data/events.json").then(r=>r.json())]);
+    return {D:st,evs:(evs.events||[])};
+  }catch(e){throw e;}
+}
+function strip(u){return u.replace(/\/+$/,"");}
+
+let timer=null,MODE="snap";
+async function go(mode,base){
+  try{
+    let D,evs;
+    if(mode==="live"){
+      const S=strip(base);
+      D=await fetch(S+"/api/state").then(r=>r.json());
+      evs=(await fetch(S+"/api/events?n=70").then(r=>r.json())).events||[];
+    } else {
+      const r=await loadFetch(mode, base); D=r.D; evs=r.evs;
+    }
+    renderKpis(D);renderSeats(D);renderPositions(D);renderTicker(evs);
+    setLive(mode==="live", mode==="live"?"connecté : "+strip(base):"données du dernier push");
+  }catch(e){
+    setLive(false, mode==="live"
+      ?"échec : desk joignable ? CORS ? (essaie Chrome/Edge ; si desk local → ssh -L tunnel)"
+      :"erreur snapshot "+e);
+    if(mode==="live") switchBack();
+  }
+}
+function setLive(ok,msg){
+  const d=document.getElementById("liveDot");
+  d.className="dot"+(ok?" ok":"");
+  document.getElementById("liveMsg").textContent=msg;
+  document.getElementById("modeBadge").textContent=ok?"LIVE SPECTATEUR":"SNAPSHOT";
+  document.getElementById("modeBadge").style.color=ok?"var(--grn)":"var(--amb)";
+}
+function switchBack(){MODE="snap";clearInterval(timer);timer=null;go("snap");}
+
+document.getElementById("btnConnect").onclick=()=>{
+  MODE="live"; const b=document.getElementById("base").value;
+  go("live",b); clearInterval(timer); timer=setInterval(()=>go("live",b),15000);
+};
+document.getElementById("btnSnap").onclick=switchBack;
+renderRoad();
+go("snap");
+
+// dernier commit public (suivi du développement)
+fetch("https://api.github.com/repos/frechfanta-os/aidesk/commits?per_page=1")
+ .then(r=>r.json()).then(j=>{const c=j[0];
+  if(!c||c.message)return;
+  const d=new Date(c.commit.author.date);
+  document.getElementById("gh").innerHTML=
+   `<b>${c.sha.slice(0,7)}</b> · ${d.toLocaleString("fr-FR")} · ${c.commit.author.name}<br>
+    <span class="cy">${c.commit.message.split("\n")[0]}</span><br>
+    <a href="https://github.com/frechfanta-os/aidesk/commits/main" target="_blank">tout l'historique →</a>`;
+ }).catch(()=>{document.getElementById("gh").innerHTML=
+   `<span class="sub">historique : <a href="https://github.com/frechfanta-os/aidesk/commits/main" target="_blank">github.com/frechfanta-os/aidesk/commits</a></span>`;});
+</script>
+</body></html>

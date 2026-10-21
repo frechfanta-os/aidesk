@@ -1,0 +1,9 @@
+[project]
+name = "aidesk"
+version = "0.1.0"
+description = "GHD AI Desk — multi-agent paper/live trading desk (Phase 0)"
+requires-python = ">=3.10"
+dependencies = ["ccxt>=4.5", "pyyaml>=6"]
+
+[project.scripts]
+aidesk = "aidesk.__main__:main"

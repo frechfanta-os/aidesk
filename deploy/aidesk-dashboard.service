@@ -1,0 +1,17 @@
+[Unit]
+Description=AIDESK dashboard web (terminal desk)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/aidesk
+ExecStart=/usr/local/bin/python3 tools/dashboard.py
+Restart=always
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+# Exposition réseau explicite (sinon 127.0.0.1) :
+# Environment=AIDESK_BIND=0.0.0.0
+
+[Install]
+WantedBy=multi-user.target

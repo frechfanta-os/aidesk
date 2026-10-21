@@ -1,0 +1,326 @@
+{
+ "events": [
+  {
+   "kind": "risk_block",
+   "note": "ENA/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "HYPE/USDT refus\u00e9 score 0.69 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "AAVE/USDT refus\u00e9 score 0.55 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "NEAR/USDT achet\u00e9 score 0.83 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "NEAR/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "ZEC/USDT achet\u00e9 score 0.80 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ZEC/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "ARB/USDT achet\u00e9 score 0.65 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ARB/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "SPCXB/USDT refus\u00e9 score 0.74 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "UNI/USDT refus\u00e9 score 0.57 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ETH/USDT achet\u00e9 score 0.96 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ETH/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "TAO/USDT achet\u00e9 score 0.81 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "TAO/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "DOGE/USDT achet\u00e9 score 0.75 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "DOGE/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "QNT/USDT achet\u00e9 score 0.69 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "QNT/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "BNB/USDT refus\u00e9 score 0.73 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "LINK/USDT refus\u00e9 score 0.56 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "LTC/USDT refus\u00e9 score 0.61 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SOL/USDT refus\u00e9 score 0.73 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SNDKB/USDT refus\u00e9 score 0.53 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ADA/USDT refus\u00e9 score 0.60 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "BTC/USDT refus\u00e9 score 0.73 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SUI/USDT achet\u00e9 score 0.78 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "SUI/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "HBAR/USDT refus\u00e9 score 0.54 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "XRP/USDT achet\u00e9 score 0.79 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "XRP/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "FET/USDT achet\u00e9 score 0.79 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "FET/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "XAUT/USDT refus\u00e9 score 0.47 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "IOST/USDT refus\u00e9 score 0.75 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "PUMP/USDT achet\u00e9 score 0.75 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "PUMP/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "ENA/USDT achet\u00e9 score 0.81 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ENA/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "AAVE/USDT achet\u00e9 score 0.74 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "AAVE/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "PEPE/USDT achet\u00e9 score 0.79 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "PEPE/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "ZEC/USDT achet\u00e9 score 0.80 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ZEC/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "ARB/USDT achet\u00e9 score 0.81 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ARB/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "HYPE/USDT achet\u00e9 score 0.83 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "HYPE/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN CRCLB/USDT +0.0437 $ en 35 min | TP | mom15@entr\u00e9e +0.43 % | vol \u00d76.2 | agent ROUTER/MEMORY"
+  },
+  {
+   "kind": "decision",
+   "note": "UNI/USDT achet\u00e9 score 0.92 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "UNI/USDT $4.86 @ 7.645821 \u2014 AGENT 02/MEMORY"
+  },
+  {
+   "kind": "decision",
+   "note": "CRCLB/USDT achet\u00e9 score 0.79 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "CRCLB/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "NEAR/USDT achet\u00e9 score 0.69 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "NEAR/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "TRUMP/USDT achet\u00e9 score 0.74 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "TRUMP/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "TAO/USDT achet\u00e9 score 0.82 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "TAO/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "ETH/USDT achet\u00e9 score 0.89 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "ETH/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "LINK/USDT achet\u00e9 score 0.78 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "LINK/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "DOGE/USDT refus\u00e9 score 0.62 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "QNT/USDT refus\u00e9 score 0.50 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SOL/USDT achet\u00e9 score 0.85 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "SOL/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "BNB/USDT refus\u00e9 score 0.61 (MEMORY)",
+   "verdict": false
+  }
+ ]
+}
