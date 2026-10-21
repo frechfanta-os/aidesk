@@ -2,95 +2,6 @@
  "events": [
   {
    "kind": "decision",
-   "note": "SOL/USDT refus\u00e9 score 0.73 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SNDKB/USDT refus\u00e9 score 0.53 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ADA/USDT refus\u00e9 score 0.60 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "BTC/USDT refus\u00e9 score 0.73 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SUI/USDT achet\u00e9 score 0.78 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "SUI/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "HBAR/USDT refus\u00e9 score 0.54 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "XRP/USDT achet\u00e9 score 0.79 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "XRP/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "FET/USDT achet\u00e9 score 0.79 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "FET/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "XAUT/USDT refus\u00e9 score 0.47 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "IOST/USDT refus\u00e9 score 0.75 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "PUMP/USDT achet\u00e9 score 0.75 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "PUMP/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "ENA/USDT achet\u00e9 score 0.81 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "ENA/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
-   "note": "AAVE/USDT achet\u00e9 score 0.74 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "AAVE/USDT \u2014 max positions (3)"
-  },
-  {
-   "kind": "decision",
    "note": "PEPE/USDT achet\u00e9 score 0.79 (MEMORY)",
    "verdict": true
   },
@@ -314,6 +225,97 @@
    "kind": "decision",
    "note": "PEPE/USDT refus\u00e9 score 0.77 (MEMORY)",
    "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "STRK/USDT achet\u00e9 score 0.68 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "STRK/USDT $4.24 @ 0.061070519999999996 \u2014 ROUTER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "ENA/USDT refus\u00e9 score 0.75 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "AAVE/USDT refus\u00e9 score 0.60 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "IOST/USDT refus\u00e9 score 0.79 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "LTC/USDT refus\u00e9 score 0.52 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "TAO/USDT refus\u00e9 score 0.52 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "TRUMP/USDT achet\u00e9 score 0.65 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "TRUMP/USDT \u2014 max positions (3)"
+  },
+  {
+   "kind": "decision",
+   "note": "XRP/USDT refus\u00e9 score 0.61 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SOL/USDT refus\u00e9 score 0.58 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "AVAX/USDT refus\u00e9 score 0.55 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "DOGE/USDT refus\u00e9 score 0.56 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ADA/USDT refus\u00e9 score 0.44 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "MSTRB/USDT refus\u00e9 score 0.53 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "INJ/USDT refus\u00e9 score 0.48 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "PUMP/USDT refus\u00e9 score 0.54 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN STRK/USDT +0.0946 $ en 10 min | TP | mom15@entr\u00e9e +3.28 % | vol \u00d71.5 | agent ROUTER/MEMORY-2"
   }
  ]
 }

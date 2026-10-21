@@ -1,6 +1,6 @@
 {
- "ts": "2026-10-21T17:20:52Z",
- "ticks": 1,
+ "ts": "2026-10-21T17:51:25Z",
+ "ticks": 29,
  "paused": false,
  "feed": {
   "offline": false,
@@ -8,11 +8,11 @@
  },
  "ledger": {
   "start_usdt": 30.0,
-  "wallet_usdt": 16.9611,
+  "wallet_usdt": 17.0557,
   "vault_usdt": 0.0,
-  "fees_paid": 0.0777,
-  "mtm_usdt": 13.1567,
-  "wins": 4,
+  "fees_paid": 0.0863,
+  "mtm_usdt": 13.2129,
+  "wins": 5,
   "losses": 2,
   "equity": [
    30.0,
@@ -21,7 +21,8 @@
    30.17,
    30.24,
    30.19,
-   30.15
+   30.15,
+   30.25
   ]
  },
  "positions": [
@@ -34,8 +35,8 @@
    "approver": "MEMORY",
    "score": 0.787,
    "ts_open": 1792603249.3605256,
-   "age_min": 0.1,
-   "last": 1351.01
+   "age_min": 30.6,
+   "last": 1356.89
   },
   {
    "symbol": "CRCLB/USDT",
@@ -46,8 +47,8 @@
    "approver": "MEMORY-2",
    "score": 0.703,
    "ts_open": 1792603250.9573376,
-   "age_min": 0.0,
-   "last": 91.31
+   "age_min": 30.6,
+   "last": 91.69
   }
  ],
  "trades_closed": [
@@ -128,6 +129,19 @@
    "agent": "AGENT 03",
    "approver": "MEMORY-2",
    "score": 0.731
+  },
+  {
+   "symbol": "STRK/USDT",
+   "entry": 0.061070519999999996,
+   "exit": 0.062558705,
+   "qty": 69.35850554408249,
+   "pnl": 0.0946,
+   "reason": "TP",
+   "ts_open": 1792603303.0896041,
+   "ts_close": 1792603923.0824625,
+   "agent": "ROUTER",
+   "approver": "MEMORY-2",
+   "score": 0.682
   }
  ],
  "agents": [
@@ -171,8 +185,8 @@
    "name": "MEMORY-2",
    "desk": "research",
    "budget": 1.0,
-   "score": 0.55,
-   "wins": 2,
+   "score": 0.65,
+   "wins": 3,
    "losses": 1,
    "rev": "v1"
   },
@@ -198,8 +212,8 @@
    "name": "ROUTER",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.6,
-   "wins": 1,
+   "score": 0.7,
+   "wins": 2,
    "losses": 0,
    "rev": "v1"
   },
@@ -266,23 +280,23 @@
   "revisions": 3
  },
  "risk": {
-  "blocks": 0,
-  "day_pnl": -0.0176,
+  "blocks": 1,
+  "day_pnl": 0.077,
   "day_frozen": false,
   "frozen_treasury": false
  },
  "counters": {
-  "signals": 3,
-  "decisions": 3,
-  "entries": 2,
-  "postmortems": 3,
+  "signals": 18,
+  "decisions": 18,
+  "entries": 3,
+  "postmortems": 4,
   "promotions": 0,
   "firings": 0
  },
  "snapshot_meta": {
-  "snapshot_ts": "2026-10-21 17:21:19 UTC",
+  "snapshot_ts": "2026-10-21 17:51:37 UTC",
   "events_kept": 70,
-  "net": 30.12,
-  "trades": 6
+  "net": 30.27,
+  "trades": 7
  }
 }
