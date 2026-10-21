@@ -59,6 +59,17 @@ Features `features_for_research()` prêtes pour la future integration RESEARCH d
 - **Tests** : `python3 -m pytest tests/ -q` (25 tests : broker, risk, matrice, research, head, restore, feed).
 - **Runbook opérations** : `docs/RUNBOOK.md`.
 
+## Site de suivi (GitHub Pages)
+
+Vue spectacle publique : **https://frechfanta-os.github.io/aidesk/**
+
+- **SNAPSHOT** : données du desk au moment du dernier push (par défaut).
+- **SPECTATEUR LIVE** : bouton `CONNECT` avec l'URL du desk (ex. `http://127.0.0.1:8787`
+  via tunnel SSH `ssh -L 8787:localhost:8787 <host>`) — rafraîchit toutes les 15 s.
+- Suivre le développement : onglet [commits](https://github.com/frechfanta-os/aidesk/commits/main).
+
+Mise à jour du snapshot : `python3 tools/build_site.py && git add docs/data && git commit -m "snapshot" && git push`.
+
 ## Audit & roadmap
 Audit du 21/10/2026 : 3 criticités corrigées (persistance du portefeuille/positions/matrice
 au redémarrage via `state.json`+SQLite, dashboard lié à `127.0.0.1` par défaut (`AIDESK_BIND`
