@@ -1,19 +1,21 @@
 {
- "ts": "2026-10-21T17:51:25Z",
- "ticks": 29,
+ "ts": "2026-10-21T20:39:47Z",
+ "ticks": 1,
  "paused": false,
  "feed": {
   "offline": false,
-  "name": "binance"
+  "name": "binance",
+  "ts": 1792615161.0625908,
+  "age_s": 27
  },
  "ledger": {
   "start_usdt": 30.0,
-  "wallet_usdt": 17.0557,
+  "wallet_usdt": 15.2814,
   "vault_usdt": 0.0,
-  "fees_paid": 0.0863,
-  "mtm_usdt": 13.2129,
-  "wins": 5,
-  "losses": 2,
+  "fees_paid": 0.1722,
+  "mtm_usdt": 14.9695,
+  "wins": 8,
+  "losses": 6,
   "equity": [
    30.0,
    30.08,
@@ -22,33 +24,52 @@
    30.24,
    30.19,
    30.15,
-   30.25
+   30.25,
+   30.3,
+   30.25,
+   30.2,
+   30.19,
+   30.27,
+   30.37,
+   30.31
   ]
  },
  "positions": [
   {
-   "symbol": "ZEC/USDT",
-   "entry": 1351.85559,
-   "qty": 0.005571941304766141,
-   "usdt": 7.54,
-   "agent": "EXEC",
-   "approver": "MEMORY",
-   "score": 0.787,
-   "ts_open": 1792603249.3605256,
-   "age_min": 30.6,
-   "last": 1356.89
+   "symbol": "AVAX/USDT",
+   "entry": 9.882939,
+   "qty": 0.5731422606170087,
+   "usdt": 5.67,
+   "agent": "ROUTER",
+   "approver": "MEMORY-2",
+   "score": 0.806,
+   "ts_open": 1792610269.3738022,
+   "age_min": 82.0,
+   "last": 9.861
   },
   {
-   "symbol": "CRCLB/USDT",
-   "entry": 91.34564999999999,
-   "qty": 0.061791119774176444,
-   "usdt": 5.65,
-   "agent": "SNIPER",
-   "approver": "MEMORY-2",
-   "score": 0.703,
-   "ts_open": 1792603250.9573376,
-   "age_min": 30.6,
-   "last": 91.69
+   "symbol": "ETH/USDT",
+   "entry": 2499.6191849999996,
+   "qty": 0.0017025553434452457,
+   "usdt": 4.26,
+   "agent": "AGENT 01",
+   "approver": "MEMORY",
+   "score": 0.921,
+   "ts_open": 1792610288.970352,
+   "age_min": 81.6,
+   "last": 2494.97
+  },
+  {
+   "symbol": "ALT/USDT",
+   "entry": 0.013326659999999999,
+   "qty": 382.3088455772114,
+   "usdt": 5.1,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.818,
+   "ts_open": 1792615185.939987,
+   "age_min": 0.0,
+   "last": 0.01332
   }
  ],
  "trades_closed": [
@@ -142,6 +163,97 @@
    "agent": "ROUTER",
    "approver": "MEMORY-2",
    "score": 0.682
+  },
+  {
+   "symbol": "STRK/USDT",
+   "entry": 0.06315156,
+   "exit": 0.06404796,
+   "qty": 67.38930914770751,
+   "pnl": 0.0518,
+   "reason": "TP",
+   "ts_open": 1792605165.595297,
+   "ts_close": 1792605903.8046312,
+   "agent": "AGENT 01",
+   "approver": "MEMORY",
+   "score": 0.775
+  },
+  {
+   "symbol": "ALT/USDT",
+   "entry": 0.013126559999999999,
+   "exit": 0.0129935,
+   "qty": 325.7304274691923,
+   "pnl": -0.0519,
+   "reason": "SL",
+   "ts_open": 1792606264.9317973,
+   "ts_close": 1792606689.8556657,
+   "agent": "AGENT 02",
+   "approver": "MEMORY",
+   "score": 0.725
+  },
+  {
+   "symbol": "ZEC/USDT",
+   "entry": 1351.85559,
+   "exit": 1346.4664300000002,
+   "qty": 0.005571941304766141,
+   "pnl": -0.0451,
+   "reason": "TIMEOUT",
+   "ts_open": 1792603249.3605256,
+   "ts_close": 1792608955.5551295,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.787
+  },
+  {
+   "symbol": "CRCLB/USDT",
+   "entry": 91.34564999999999,
+   "exit": 91.41427,
+   "qty": 0.061791119774176444,
+   "pnl": -0.0071,
+   "reason": "TIMEOUT",
+   "ts_open": 1792603250.9573376,
+   "ts_close": 1792608955.611035,
+   "agent": "SNIPER",
+   "approver": "MEMORY-2",
+   "score": 0.703
+  },
+  {
+   "symbol": "STRK/USDT",
+   "entry": 0.062961465,
+   "exit": 0.06368814,
+   "qty": 119.79470299809574,
+   "pnl": 0.0719,
+   "reason": "TP",
+   "ts_open": 1792609302.97701,
+   "ts_close": 1792609704.7955346,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.676
+  },
+  {
+   "symbol": "PUMP/USDT",
+   "entry": 0.004992495,
+   "exit": 0.0050684645000000006,
+   "qty": 1514.7596542410158,
+   "pnl": 0.0998,
+   "reason": "TP",
+   "ts_open": 1792610261.9423985,
+   "ts_close": 1792614192.9265864,
+   "agent": "SNIPER",
+   "approver": "MEMORY-2",
+   "score": 0.851
+  },
+  {
+   "symbol": "ALT/USDT",
+   "entry": 0.013256625,
+   "exit": 0.013143425,
+   "qty": 385.08217589318554,
+   "pnl": -0.0538,
+   "reason": "SL",
+   "ts_open": 1792614346.4554603,
+   "ts_close": 1792614586.9216104,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.649
   }
  ],
  "agents": [
@@ -176,36 +288,36 @@
    "name": "MEMORY",
    "desk": "research",
    "budget": 1.0,
-   "score": 0.55,
-   "wins": 2,
-   "losses": 1,
+   "score": 0.3,
+   "wins": 4,
+   "losses": 4,
    "rev": "v1"
   },
   {
    "name": "MEMORY-2",
    "desk": "research",
-   "budget": 1.0,
-   "score": 0.65,
-   "wins": 3,
-   "losses": 1,
+   "budget": 1.2,
+   "score": 0.6,
+   "wins": 4,
+   "losses": 2,
    "rev": "v1"
   },
   {
    "name": "EXEC",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.6,
-   "wins": 1,
-   "losses": 0,
+   "score": 0.4,
+   "wins": 2,
+   "losses": 2,
    "rev": "v1"
   },
   {
    "name": "SNIPER",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.6,
-   "wins": 1,
-   "losses": 0,
+   "score": 0.55,
+   "wins": 2,
+   "losses": 1,
    "rev": "v1"
   },
   {
@@ -221,8 +333,8 @@
    "name": "AGENT 01",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.6,
-   "wins": 1,
+   "score": 0.7,
+   "wins": 2,
    "losses": 0,
    "rev": "v1"
   },
@@ -230,9 +342,9 @@
    "name": "AGENT 02",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.35,
+   "score": 0.2,
    "wins": 0,
-   "losses": 1,
+   "losses": 2,
    "rev": "v1"
   },
   {
@@ -273,30 +385,30 @@
   }
  ],
  "matrix": {
-  "pass_threshold": 0.622,
-  "min_momentum": 0.0019,
-  "min_vol_surprise": 1.45,
+  "pass_threshold": 0.634,
+  "min_momentum": 0.0023,
+  "min_vol_surprise": 1.55,
   "max_momentum_1h": 0.06,
-  "revisions": 3
+  "revisions": 7
  },
  "risk": {
   "blocks": 1,
-  "day_pnl": 0.077,
+  "day_pnl": 0.0,
   "day_frozen": false,
   "frozen_treasury": false
  },
  "counters": {
-  "signals": 18,
-  "decisions": 18,
-  "entries": 3,
-  "postmortems": 4,
+  "signals": 3,
+  "decisions": 3,
+  "entries": 1,
+  "postmortems": 0,
   "promotions": 0,
   "firings": 0
  },
  "snapshot_meta": {
-  "snapshot_ts": "2026-10-21 17:51:37 UTC",
+  "snapshot_ts": "2026-10-21 20:39:51 UTC",
   "events_kept": 70,
-  "net": 30.27,
-  "trades": 7
+  "net": 30.25,
+  "trades": 14
  }
 }

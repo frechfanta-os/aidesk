@@ -248,3 +248,11 @@ corrigés — assertions resserrées sur la réalité, code jamais affaibli).
 Suite complète : **80 passed in 14.35s**. Diff : 8 fichiers, +28/−28 ·
 `git diff --check` OK · scan secrets vide · aucune donnée trackée modifiée.
 Restart desk prévu après commit (MTM + fallbacks + index en production).
+
+### Vérification production B6 — **2026-10-21 21:4x**
+Restart supervisé (watchdog+desk, PIDs par `ps` précis) : restore identique
+pré/post (wallet $20.38, 2 positions AVAX/ETH, 14 trades, matrice rev 7).
+Index `idx_trades_ts_close`/`idx_decisions_ts` créés sur la DB réelle ;
+répartition modes : `live 1 · unknown 13` (aucune donnée réécrite).
+Dashboard HTTP 200. Aucune donnée détruite ; backup pré-migration conservé
+(`aidesk.db.bak-avant-B5`).
