@@ -4,6 +4,19 @@ from .. import llm
 from ..types import Decision, Signal
 from .base import Agent, clamp01
 
+_MAX_OBJ_CHARS = 160
+
+
+def _sanitize_objection(obj) -> str | None:
+    """Sortie SKEPTIC = entrée NON FIABLE : texte nettoyé et borné, sinon None.
+
+    Une objection n'influence jamais verdict/agg ; elle est seulement journalisée.
+    Non-str (exception, dict…), vide ou blanches → None. Bornées à _MAX_OBJ_CHARS."""
+    if not isinstance(obj, str):
+        return None
+    t = " ".join(obj.split())                  # espaces/newlines/control chars collapsés
+    return t[:_MAX_OBJ_CHARS] or None
+
 
 class Research:
     """MEMORY score-cards a signal against the mutable scoring matrix."""
@@ -37,16 +50,22 @@ class Research:
                + m.w_overext * s_over + m.w_liquidity * s_liq)
         verdict = all(checks.values()) and agg >= m.pass_threshold
         thesis = llm.describe(f, checks, round(agg, 3), verdict)
-        obj = llm.critique(
-            f"{f.symbol} last={f.last} mom15={f.mom_15m:.4f} mom1h={f.mom_1h:.4f} "
-            f"vol_surprise={f.vol_surprise:.2f} qv={f.quote_volume_24h:.0f}",
-            thesis,
-        )
+        obj = None
+        if verdict:                                # B3 : le SKEPTIC n'est appelé que
+            try:                                   # sur un candidat accepté (utile);
+                obj = _sanitize_objection(llm.critique(   # toute sortie est non fiable.
+                    f"{f.symbol} last={f.last} mom15={f.mom_15m:.4f} "
+                    f"mom1h={f.mom_1h:.4f} vol_surprise={f.vol_surprise:.2f} "
+                    f"qv={f.quote_volume_24h:.0f}",
+                    thesis,
+                ))
+            except Exception:                      # aucune panne LLM ne perd une décision
+                obj = None
         if obj:
             self.skeptics += 1
         d = Decision(ts=now, symbol=sig.symbol, agent=agent.name, scores=scores,
                      agg=round(agg, 3), verdict=verdict, thesis=thesis,
-                     objection=obj if verdict else None)
+                     objection=obj)
         self.decisions_made += 1
         self.store.add_decision(d)
         return d

@@ -86,3 +86,45 @@ nul sur feed.py avant l'ajout réel du ts).
 redémarrage supervisé par watchdog+restore juste après le commit (procédure
 RUNBOOK, integrity de la batterie 3 positions ouverte réelle vérifiée avant/après).
 
+---
+
+## B3 — Politique d'appel SKEPTIC (LLM consultatif borné) — **2026-10-21** ✅
+
+**Flux reconstitué** : SIGNS radar → `research.decide()` calcule checks/scores/agg/
+verdict **déterministes d'abord** ; `llm.critique()` était ensuite appelé
+SYSTÉMATIQUEMENT (y compris sur refus — objection calculée puis jetée :
+`objection=obj if verdict else None`). Fenêtre utile identifiée : uniquement quand
+verdict=True (candidat accepté, avant le desk d'exécution) — le refus déterministe
+rend l'analyse inutile ; données invalides → ce candidat n'atteint jamais RESEARCH
+(gate radar fraîcheur B2), veto RISK → appelé après la décision (hors chemin LLM).
+
+**Reproduction en rouge** (5 failed / 3 passed) : appel sur refus compté (1 au
+lieu de 0) · exception critique détruit la décision (TimeoutError remonte) ·
+objection de 465+ chars stockée telle quelle · RuntimeError stocké COMME
+texte d'objection · + 1 bug de MON test corrigé (exception-instance passée comme
+fonction patchée — erreur de test, pas du code desk).
+
+**Correctif** (`aidesk/desks/research.py`, +25/−6) :
+1. `critique()` appelé UNIQUEMENT si verdict=True ;
+2. try/except autour de l'appel : toute panne LLM (timeout/HTTP/breaker/bug)
+   → `obj=None`, la décision déterministe est conservée (jamais perdue) ;
+3. `_sanitize_objection()` : sortie LLM = texte non fiable — non-str → None,
+   whitespace collapsé, borné à 160 chars, vide → None ;
+4. le LLM ne touche toujours rien : verdict/agg inchangés, zéro accès au ledger
+   (test dédié `test_ledger_intact_apres_tous_les_senarios`).
+Config inchangée : Z.ai `glm-5.3-flash`, breaker 3 échecs → 600 s conservé(s)
+(aucun fournisseur/endpoint/clé ajouté).
+
+**Comportement de repli documenté** : SKEPTIC indisponible/trop lent/mal formé
+→ objection None, décision identique à sans-LLM ; breaker ouvert → `critique()`
+rend None avant tout import client (test prouve zéro instanciation via garde).
+
+**Tests ajoutés** — `tests/test_skeptic_policy.py`, 8 tests. Suite complète :
+**58 passed in 19.81s**. Diff : recherche.py seul (+8 tests fichier) · scan
+secrets clean · aucune donnée/config touchée · `git diff --check` OK.
+
+**Limites restantes** : la politique est au niveau décision (monde synchrone) ;
+un appel LLM peut toujours ralentir le tick jusqu'au timeout read ~20 s — un
+passage en tâche de fond est reporté (amélioration, pas requis : breaker présent).
+
+
