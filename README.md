@@ -56,6 +56,10 @@ Features `features_for_research()` prêtes pour la future integration RESEARCH d
 - **Watchdog** : `python3 tools/watchdog.py &` (auto-relance après crash ; `AIDESK_ARGS`,
   `AIDESK_MAX_RESTARTS`) — unités systemd prêtes dans `deploy/`.
 - **Rapport hebdo** : `python3 tools/report_week.py -o docs/REPORTS/<date>.md`.
+- **Cohérence** : `python3 tools/verify_desk.py` — réconciliation SQLite ↔ state.json ↔
+  events.jsonl (code 0 OK / 1 avertissements / 2 fatal).
+- **Dataset versionné** : `python3 tools/export_dataset.py` — corpus CSV + manifeste
+  SHA-256 dans `docs/data/exp/` (étiqueté : données expérimentales, aucune garantie).
 - **Tests** : `python3 -m pytest tests/ -q` (80 tests : broker, risk, matrice, research, head,
   restore, feed, dashboard, fraîcheur, skeptic, trésorerie, sessions, nettoyage).
 - **Runbook opérations** : `docs/RUNBOOK.md`.
