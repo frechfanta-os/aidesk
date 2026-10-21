@@ -127,4 +127,32 @@ secrets clean · aucune donnée/config touchée · `git diff --check` OK.
 un appel LLM peut toujours ralentir le tick jusqu'au timeout read ~20 s — un
 passage en tâche de fond est reporté (amélioration, pas requis : breaker présent).
 
+---
+
+## B4 — Gel de trésorerie évalué à chaque tick — **2026-10-21** ✅
+
+**Constat reproduit par lecture** : `check_treasury_freeze()` (risk.py:53-58) n'était
+appelé QUE dans `TreasuryDesk.hour_tick()` → un net tombant sous 60 % du start
+entre deux heures laissait jusqu'à 1 h d'entrées possibles.
+
+**Correctif** (`aidesk/runtime.py`, +2) : `self.risk.check_treasury_freeze()` dans
+`tick()` juste avant le bloc radar/entrées. **Aucun seuil ou politique modifié**
+(hystérésis 60 %/85 %, gel journalier, sizing, semua caps inchangés) ; `hour_tick`
+conservé (appel idempotent). La fonction est stateless/re-dérivée du ledger →
+redémarrage sûr sans étiquette persistée.
+
+**Tests ajoutés** — `tests/test_treasury_freeze.py`, 7 tests : gel activé entre
+deux heures + veto « gel trésorerie » via `allow()` · bande intermédiaire reste
+gelée (hystérésis) · dégel exactement à 85 % · wiring : aucune entrée paper alors
+que verdict=True (achats capturés = 0) · reprise dès net ≥ 85 % au tick suivant ·
+re-dérivation au boot (nouveau Desk gélifié au 1er tick sans état persisté) ·
+positions ouvertes toujours gérées pendant le gel (sorties non bloquées).
+Horloge non modifiée : `now` paramétré, chdir(tmp_path) pour l'isolation.
+
+Suite complète : **65 passed in 15.89s**. Diff : runtime.py +2 lignes + nouveaux
+tests · `git diff --check` OK · scan secrets vide · données/config intacts.
+Redémarrage supervisé du desk après commit (watchdog PID précis, restore
+vérifié avant de conclure).
+
+
 

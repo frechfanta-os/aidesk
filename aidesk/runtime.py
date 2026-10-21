@@ -188,6 +188,8 @@ class Desk:
         decisions = 0
         entries = 0
         if not self.paused:
+            self.risk.check_treasury_freeze()   # B4 : gel évalué à CHAQUE tick
+                                                # (précédemment 1×/h → latence jusqu'à 1 h)
             sigs = self.radar.scan(feats, set(self.broker.open), now,
                                    self.m.min_quote_volume)
             signals = len(sigs)
