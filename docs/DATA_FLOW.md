@@ -98,6 +98,12 @@ Contrats de qualité exigés (déjà partiellement implémentés dans whale.py) 
 5. qualité : RESEARCH reçoit `quality: A|B|C` et les observations de qualité C sont étiquetées « non-actionnable » ;
 6. lecture seule : urllib GET/JSON-RPC ; aucune clé signée ; les endpoints sont uniquement des interfaces **publiques documentées** (RPC Solana, API Jupiter). **Aucune supposition GMGN** (pas d'appel à une API non documentée, non gratuite, non stable par preuve).
 
+> **Implémentation (Phase C, 2026-10-21)** : `aidesk/market/solana.py` —
+> `Observation` (source/ts/ok/TTL), `RpcProvider` (adapter sur les primitives de `whale.py`),
+> `OfflineProvider` (absent ≠ 0), `resolve_provider()`. **Consommé** par
+> `whale.snapshot(..., provider=…)` et le CLI `tools/whale_scan.py --offline` ; guard
+> lecture-seule testé (`tests/test_solana_provider.py::test_guard_lecture_seule_sources`).
+
 Adapters prévus (Phase C rénelle) : `RpcSolanaProvider` (whale.py wrapped), `HistoricalProvider` (dumps jsonl versionnés à disk), `CexPriceProvider` (ccxt déjà présent).
 
 ## 7. Cohérence tri-couches (statut)

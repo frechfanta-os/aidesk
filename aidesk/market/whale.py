@@ -117,22 +117,48 @@ def largest_holders(mint: str, top: int = 20) -> list[dict]:
 
 
 def snapshot(mint: str, db: str = "whale.db",
-             price_symbol: str | None = None) -> dict:
-    """Snapshot whales + persistance + verdict. Dégrade poliment si endpoint lourd."""
-    mi = mint_info(mint)
+             price_symbol: str | None = None,
+             provider: "Any | None" = None) -> dict:
+    """Snapshot whales + persistance + verdict. Dégrade poliment si endpoint lourd.
+
+    Phase C : `provider` (SolanaDataProvider) consommé pour TOUTES les sources
+    ; None → `resolve_provider()` (RpcProvider lecture-seule par défaut,
+    OfflineProvider si `--offline`/AIDESK_SOLANA=offline). Les verdicts et le
+    schéma de sortie restent identiques au chemin historique."""
+    from .solana import resolve_provider
+
+    if provider is None:
+        provider = resolve_provider(price_symbol=price_symbol)
+    mi_obs = provider.mint_info(mint)
+    if not mi_obs.ok or mi_obs.value is None:
+        raise WhaleError(f"compte mint introuvable : {mint} "
+                         f"({(mi_obs.note or 'erreur inconnue')[:80]})")
+    mi = mi_obs.value
     sup = mi["supply"] / (10 ** mi["decimals"]) if mi["decimals"] else 0.0
-    try:
-        holders = largest_holders(mint)
-        top10 = sum(h["amount"] for h in holders[:10])
-        top20 = sum(h["amount"] for h in holders)
-        top10_pct = (top10 / sup) if sup else 0.0
-        top20_pct = (top20 / sup) if sup else 0.0
-        heavy_ok = True
-    except WhaleError as e:
-        holders, top10_pct, top20_pct, heavy_ok = [], None, None, False
-        heavy_err = str(e)
-    price = price_jupiter(mint) or price_ccxt(price_symbol)
+    hold_obs = provider.largest_holders(mint)
+    heavy_ok = bool(hold_obs.ok) and hold_obs.value is not None
+    holders = list(hold_obs.value) if heavy_ok else []
+    heavy_err = "" if heavy_ok else (hold_obs.note or "indisponible")
+    top10 = sum(h["amount"] for h in holders[:10]) if heavy_ok else None
+    top20 = sum(h["amount"] for h in holders) if heavy_ok else None
+    # sémantique legacy conservée : heavy_ok + supply nulle → 0.0 (comportement
+    # historique). supply inconnue en pratique impossible pour un mint valide.
+    top10_pct = (top10 / sup) if (heavy_ok and sup) else (0.0 if heavy_ok else None)
+    top20_pct = (top20 / sup) if (heavy_ok and sup) else (0.0 if heavy_ok else None)
+    px_obs = provider.price(mint)
+    price = px_obs.value if px_obs.ok else None
     prev = previous(mint, db)
+    delta = (top10_pct - prev) if (top10_pct is not None and prev is not None) else None
+    if not heavy_ok:
+        verdict = f"PARTIEL (RPC lourd indisponible — {heavy_err[:80]})"
+    elif mi["mint_authority"] or mi["freeze_authority"]:
+        verdict = "RUG-RISK (autorité mint/freeze NON révoquée)"
+    elif top10_pct > 0.55:
+        verdict = "CONCENTRÉ (top10 > 55 % de la supply)"
+    elif delta is not None and abs(delta) > 0.10:
+        verdict = f"MOUVEMENT WHALE (Δ top10 {delta * 100:+.1f} pts)"
+    else:
+        verdict = "OBSERVATION (distribution normale)"
     delta = (top10_pct - prev) if (top10_pct is not None and prev is not None) else None
     if not heavy_ok:
         verdict = f"PARTIEL (RPC lourd indisponible — {heavy_err[:80]})"

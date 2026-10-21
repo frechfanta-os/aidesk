@@ -262,3 +262,48 @@ Le message du commit de snapshot `d5a7e10` indiquait « 9W/5L » : **FAUX**.
 Vérité SQLite : 14 trades = **8W/6L**, PnL net réalisé **+0.3113 $**.
 Historique poussé NON réécrit (jamais de force-push sur main) ; le présent
 correctif fait foi. Le rapport final Phase B utilise les chiffres vérifiés.
+
+---
+
+# Phase C — Couche Solana en lecture seule — **2026-10-21** ✅
+
+**Objectif** : transformer l'esquisse `SolanaDataProvider` (docs/DATA_FLOW.md:86)
+en module réel **consommé** (leçon B6 : pas de code mort), lecture seule, mode
+offline explicite, None ≠ 0, TTL de péremption, AUCUNE supposition GMGN.
+
+**Nouveau** (`aidesk/market/solana.py`) :
+- `Observation(name/ts/value/ok/note)` — provenance + epoch sur chaque donnée ;
+  `age/stale/usable(now, ttl)` — même taxonomie que Features de B2 (inconnu si
+  ts≤0 ; Périmé si âge>TTL ; le consommateur fixe le seuil) ;
+- `RpcProvider` — adapter sur les primitives éprouvées de `whale.py` (RPC
+  publics + clé gratuite optionnelle `AIDESK_RPC_URL`) ; dégradation en
+  Observation ok=False (endpoint lourd refusé → ABSENT, jamais[]) ;
+- `OfflineProvider` — zéro réseau, zéro valeur inventée ;
+- `resolve_provider()` — offline explicite par argument ou `AIDESK_SOLANA=offline` ;
+  défaut : RpcProvider.
+
+**Wiring réel** : `whale.snapshot(..., provider=…)` … route TOUTES les sources
+via le provider (verdicts et schéma de sortie identiques au chemin historique ;
+sémantique legacy conservée exc. edge « liste vide réelle » → PARTIEL, plus sûr) ;
+`tools/whale_scan.py --offline` active le mode explicite (vérifié : échec
+instantané « mode offline explicite », zéro appel réseau).
+
+**Guard lecture-seule** : test permanent sur les sources (aucun
+sendTransaction/signTransaction/requestAirdrop/signer/keypair/privateKey).
+
+**Tests ajoutés** — `tests/test_solana_provider.py`, 11 tests (TOUS mockés,
+aucun réseau). 5 échecs initiaux diagnostiqués honnêtement : NOW de module figé
+(age=0.0), signature boom(m) sans top, collision attribut/méthode `price` du
+fake, répartition fausse (concentration coupée entre 20 porteurs → top10 = 50 %
+du ciblé), attente PARTIEL impossible offline (offline lève WhaleError avant
+tout — le PARTIEL vient du RPC léger OK + lourd refusé). Tests corrigés, code
+inchangé sur le fond.
+
+**Suite complète : 91 passed** (80 + 11). Diff : solana.py nouveau, whale.py
+(+54/−20 trimming), whale_scan.py, DATA_FLOW.md. Aucune donnée trackée
+modifiée · scan secrets vide · `git diff --check` OK · runtime/feed NON touchés
+→ pas de redémarrage du desk requis (couche stable hors de la boucle tick).
+
+**Non atteint en C** : la collecte whale LIVE avec les endpoints lourds reste
+bloquée sur la clé gratuite `AIDESK_RPC_URL` (état inchangé ; le layer est prêt,
+la clé activera le provider sans autre changement). Pas de GMGN (contrat).

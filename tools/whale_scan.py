@@ -18,17 +18,24 @@ def main() -> None:
     ap.add_argument("--mint", help="adresse du mint SPL (requis sans --watchlist)")
     ap.add_argument("--watchlist", help="fichier : une adresse wallet par ligne")
     ap.add_argument("--price-symbol", default=None,
-                    help="fallback CEX si Jupiter échoue (ex: BONK/USDT)")
+                    help="fallback CEX si Jupiter échoué (ex: BONK/USDT)")
+    ap.add_argument("--offline", action="store_true",
+                    help="mode offline explicite : aucun appel réseau, données "
+                         "marquées ABSENTES (Phase C — jamais de zéros inventés)")
     ap.add_argument("--db", default="whale.db")
     args = ap.parse_args()
+
+    from aidesk.market.solana import resolve_provider
+    provider = resolve_provider(offline=args.offline, price_symbol=args.price_symbol)
 
     if args.watchlist:
         addrs = [ln.strip() for ln in Path(args.watchlist).read_text()
                  .splitlines() if ln.strip() and not ln.startswith("#")]
-        print(f"== WATCHLIST ({len(addrs)} wallets) ==")
-        for w in whale.watch_balances(addrs):
-            sol = "RPC fail" if w["sol"] < 0 else f"{w['sol']:,.2f} SOL"
-            print(f"  {w['wallet']:<48} {sol} | token accts {w['tokens']}")
+        tag = " (OFFLINE — données absentes)" if args.offline else ""
+        print(f"== WATCHLIST ({len(addrs)} wallets){tag} ==")
+        for w in provider.watch(addrs):
+            sol = "RPC fail" if w.sol < 0 else f"{w.sol:,.2f} SOL"
+            print(f"  {w.wallet:<48} {sol} | token accts {w.tokens}")
 
     if not args.mint:
         if not args.watchlist:
@@ -37,7 +44,8 @@ def main() -> None:
 
     print(f"== SNAPSHOT {args.mint} ==")
     try:
-        snap = whale.snapshot(args.mint, db=args.db, price_symbol=args.price_symbol)
+        snap = whale.snapshot(args.mint, db=args.db,
+                              price_symbol=args.price_symbol, provider=provider)
     except whale.WhaleError as e:
         print(f"  ÉCHEC : {e}")
         return
