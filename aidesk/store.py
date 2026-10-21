@@ -31,18 +31,31 @@ class Store:
         self.conn = sqlite3.connect(path)
         self.conn.executescript(SCHEMA)
         self.conn.commit()
+        # B5 — provenance de session (migration ADDITIVE, transactionnelle, sans
+        # réécriture des anciennes lignes) : les trades historiques lisent 'unknown'.
+        # Réversible en lecture : DROP COLUMN trades.mode (SQLite ≥ 3.35) recrée
+        # exactement le schéma d'origine sans perte.
+        cols = {r[1] for r in self.conn.execute("PRAGMA table_info(trades)")}
+        if "mode" not in cols:
+            self.conn.execute(
+                "ALTER TABLE trades ADD COLUMN mode TEXT DEFAULT 'unknown'")
+            self.conn.commit()
+        self.mode: str = "unknown"      # 'live' | 'offline' | 'unknown' (fixé par le desk)
         self.jsonl_path = jsonl
         self._fh = open(jsonl, "a", encoding="utf-8")
 
     def add_trade(self, t) -> None:
         self.conn.execute(
-            "INSERT INTO trades (ts_open,ts_close,symbol,entry,exit,qty,pnl,reason,agent,approver,score,features)"
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO trades (ts_open,ts_close,symbol,entry,exit,qty,pnl,reason,"
+            "agent,approver,score,features,mode)"
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (t.ts_open, t.ts_close, t.symbol, t.entry, t.exit, t.qty, t.pnl, t.reason,
-             t.agent, t.approver, t.score, json.dumps(t.features.__dict__)),
+             t.agent, t.approver, t.score, json.dumps(t.features.__dict__),
+             self.mode if self.mode else "unknown"),
         )
         self.conn.commit()
-        self._emit("trade", t.__dict__ | {"features": t.features.__dict__})
+        self._emit("trade", t.__dict__ | {"features": t.features.__dict__,
+                                          "mode": self.mode})
 
     def add_decision(self, d) -> None:
         self.conn.execute(
@@ -75,11 +88,13 @@ class Store:
         ).fetchall()
 
     def all_trades(self) -> list[dict]:
-        cols = ("symbol,entry,exit,qty,pnl,reason,ts_open,ts_close,agent,approver,score")
-        rows = self.conn.execute(f"SELECT {cols} FROM trades ORDER BY id").fetchall()
-        keys = cols.split(",")
-        out = [dict(zip(keys, r)) for r in rows]
-        return out
+        keys = ["symbol", "entry", "exit", "qty", "pnl", "reason", "ts_open",
+                "ts_close", "agent", "approver", "score", "mode"]
+        rows = self.conn.execute(
+            "SELECT symbol,entry,exit,qty,pnl,reason,ts_open,ts_close,agent,"
+            "approver,score,COALESCE(mode,'unknown') FROM trades ORDER BY id"
+        ).fetchall()
+        return [dict(zip(keys, r)) for r in rows]
 
     def closed_trades(self) -> int:
         return self.conn.execute("SELECT count(*) FROM trades").fetchone()[0]

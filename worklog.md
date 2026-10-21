@@ -154,5 +154,49 @@ tests · `git diff --check` OK · scan secrets vide · données/config intacts.
 Redémarrage supervisé du desk après commit (watchdog PID précis, restore
 vérifié avant de conclure).
 
+---
+
+## B5 — Provenance de session (live/offline), migration additive — **2026-10-21** ✅
+
+**Constat reproduit** : le schéma trades ne portait aucun mode ; une session
+`--offline` (ou une bascule offline après 2 échecs réseau) écrivait ses trades
+de démo SANS marque → contamination silencieuse du corpus de performance.
+
+**Migration additive, transactionnelle, sans réécriture** (`aidesk/store.py`) :
+`ALTER TABLE trades ADD COLUMN mode TEXT DEFAULT 'unknown'` appliquée à l'ouverture
+(Store.__init__, au boot du desk) — les lignes historiques préservées à l'identique,
+lues 'unknown'. **Stratégie documentée** : sauvegarde `cp aidesk.db <bak>` avant le
+1er boot BB5 en production (effectuée, voir §7) ; validation sur bases de test ;
+retour arrière en lecture via `DROP COLUMN mode` (SQLite ≥ 3.35, sans perte).
+2 e-dits : keys extraits explicitement (le split SQL du 1er jet coupait le
+COALESCE → corrigé avant toute exécution utile).
+
+**Source du mode = état RÉEL du feed** (`runtime.py`) : `--offline` explicite ou
+bascule du feed (mode check à chaque tick) · jamais inféré du nom de processus.
+Le JSONL trade porte aussi `payload.mode`.
+
+**Stats protégées** (`tools/report_week.py`) : `--mode operational` (défaut :
+exclut offline/test), `--mode all` (tout, étiqueté), `--mode offline` (démo seule),
++ ligne de provenance par comptes ; ancien schéma (sans colonne) annoncé
+explicitement (« none (ancien schéma) ») — jamais de mélange silencieux.
+
+**Tests ajoutés** — `tests/test_session_modes.py`, 7 tests : étiquetage live/offline
+· migration sur DB historique (2 rows ancien schéma → conservées, 'unknown', PnL
+intacts, cohabitation avec nouveau) · restauration après migration (trade SQLite
+restauré, aucune duplication) · stats opérationnelles excluent la démo (+10.99 $
+→ +1.00 $ re-stats par mode) · ancien schéma sans crash · mode suit l'état réel
+du feed (bascule testée) · le JSONL porte le mode.
+**2 échecs honnêtement diagnostiqués en cours de route** : mes attentes testaient
+des lignes que le rapport n'imprime jamais (symboles) — vérifié manuellement les
+sorties des 3 périmètres, assertions réécrites sur la réalité, code report inchangé
+sur le fond (un espace de formatage corrigé + clés SQL du 1er jet corrigées avant
+exécution utile).
+
+Suite complète : **72 passed in 18.53s**. Diff : store/runtime/report_week + tests
+· aucune donnée trackée modifiée · `git diff --check` OK · scan secrets vide.
+Migration de la DB réelle (aidesk.db) : SAUVEGARDE puis boot B5 au redémarrage
+suivant du desk (lignes 12 trades historiques liront 'unknown', conservées).
+
+
 
 

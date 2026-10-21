@@ -48,6 +48,10 @@ class Desk:
         self.head = HeadOffice(settings, self.store)
         self.ctl = "ctl"
         os.makedirs(self.ctl, exist_ok=True)
+        # B5 : provenance de session — utilisée par store.add_trade ; le mode
+        # reflète l'état RÉEL du feed (--offline explicite ou bascule offline),
+        # jamais un nom de processus.
+        self.store.mode = "offline" if (offline or self.feed.offline) else "live"
         self.last_feats: dict[str, Any] = {}
         self.paused = False
         self.stop = False
@@ -183,6 +187,9 @@ class Desk:
         now = time.time()
         feats = self.feed.refresh(self.s.top_n)
         self.last_feats.update(feats)
+        # B5 : si le feed a basculé offline (2 échecs réseau), le mode suit l'état
+        # réel des données — les trades de démo seront étiquetés 'offline'.
+        self.store.mode = "offline" if self.feed.offline else "live"
         closes = self._manage_positions(feats, now)
         signals = 0
         decisions = 0
