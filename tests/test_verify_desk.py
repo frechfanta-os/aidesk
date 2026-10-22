@@ -128,3 +128,17 @@ def test_provenance_repartie(tmp_path):
     code, msgs = verify(tmp_path)
     assert code == 0
     assert any("offline 1" in m and "live 2" in m for m in msgs)
+
+
+def test_equity_position_ouverte_mtm_flottant_code_0(tmp_path):
+    """Cas production du 22/10 : equity=réalisé (wallet+engagé), MTM flottant ≠ invariant."""
+    seed_consistent(tmp_path, with_positions=True)
+    st = json.loads((tmp_path / "state.json").read_text())
+    st["ledger"]["wallet_usdt"] = 27.0        # engagé 3.0 sorti du cash
+    st["ledger"]["equity"] = 30.0             # 27 + 0 + 3 = réalisé exact
+    st["ledger"]["mtm_usdt"] = 1.2            # flottant quelconque
+    (tmp_path / "state.json").write_text(json.dumps(st), encoding="utf-8")
+    code, msgs = verify(tmp_path)
+    assert code == 0
+    joined = "\n".join(msgs)
+    assert "flottant MTM +1.20 $" in joined

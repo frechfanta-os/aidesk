@@ -72,16 +72,24 @@ def verify(root: str | Path = ".") -> tuple[int, list[str]]:
         out.append(f"AVERT. montant négatif : wallet={wallet} vault={vault}")
     else:
         out.append(f"OK trésorerie : wallet {wallet:.2f} $, vault {vault:.2f} $")
+    # equity de la courbe = RÉALISÉ seul (start + Σ PnL) — invariant correct :
+    # wallet + vault + capital ENGAGÉ des positions ouvertes. Le MTM flottant
+    # n'y appartient pas (il bouge entre ticks ; le constat du 2026-10-22,
+    # avert 30.34 vs 30.31, était un invariant mal formé de CET outil).
+    committed = sum(float(p.get("usdt", 0.0) or 0.0)
+                    for p in (state.get("positions") or []))
     eq_raw = led.get("equity", 0.0)
     # equity peut être une COURBE (liste de points, du snapshot) ou un scalaire
     eq = float(eq_raw[-1]) if isinstance(eq_raw, list) and eq_raw else \
         float(eq_raw if not isinstance(eq_raw, list) else 0.0)
-    if eq and abs(eq - (wallet + vault + mtm)) > 0.01:
+    expected = wallet + vault + committed
+    if eq and abs(eq - expected) > 0.01:
         code = max(code, 1)
-        out.append(f"AVERT. equity {eq:.2f} ≠ wallet+vault+mtm "
-                   f"{wallet + vault + mtm:.2f}")
+        out.append(f"AVERT. equity {eq:.2f} ≠ wallet+vault+engagé {expected:.2f}"
+                   f" ({committed:.2f} engagés en {len(state.get('positions') or [])} pos.)")
     else:
-        out.append(f"OK equity ≈ {eq:.2f} $")
+        out.append(f"OK equity {eq:.2f} $ (réalisé) — flottant MTM {mtm:+.2f} $ "
+                   "(indicatif, ne fait pas partie de l'invariant)")
 
     # 3 — positions ouvertes : positité stricte des champs de position
     for p in state.get("positions") or []:
