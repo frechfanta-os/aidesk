@@ -1,12 +1,12 @@
 {
- "ts": "2026-10-22T09:00:20Z",
- "ticks": 3,
+ "ts": "2026-10-22T11:35:58Z",
+ "ticks": 2,
  "paused": false,
  "feed": {
   "offline": false,
   "name": "binance",
-  "ts": 1792659603.4341505,
-  "age_s": 17
+  "ts": 1792668945.2744555,
+  "age_s": 13
  },
  "ledger": {
   "start_usdt": 30.0,
@@ -520,19 +520,19 @@
    "name": "AGENT 01",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.25,
-   "wins": 2,
-   "losses": 3,
-   "rev": "v1"
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v2"
   },
   {
    "name": "AGENT 02",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.15,
-   "wins": 1,
-   "losses": 3,
-   "rev": "v1"
+   "score": 0.5,
+   "wins": 0,
+   "losses": 0,
+   "rev": "v2"
   },
   {
    "name": "AGENT 03",
@@ -593,7 +593,7 @@
   "firings": 0
  },
  "snapshot_meta": {
-  "snapshot_ts": "2026-10-22 09:00:35 UTC",
+  "snapshot_ts": "2026-10-22 11:36:35 UTC",
   "events_kept": 70,
   "net": 30.43,
   "trades": 30
