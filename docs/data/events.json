@@ -2,241 +2,6 @@
  "events": [
   {
    "kind": "decision",
-   "note": "SOL/USDT achet\u00e9 score 0.81 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "entry",
-   "note": "SOL/USDT $5.3 @ 99.17433451273898 \u2014 AGENT 01/MEMORY"
-  },
-  {
-   "kind": "trade",
-   "note": "GAIN "
-  },
-  {
-   "kind": "postmortem",
-   "note": "GAIN LINK/USDT +0.1156 $ en 11 min | TP | mom15@entr\u00e9e +0.55 % | vol \u00d73.7 | agent ROUTER/MEMORY"
-  },
-  {
-   "kind": "trade",
-   "note": "PERTE "
-  },
-  {
-   "kind": "postmortem",
-   "note": "PERTE SOL/USDT -0.0622 $ en 4 min | SL | mom15@entr\u00e9e -0.73 % | vol \u00d73.0 | agent AGENT 01/MEMORY"
-  },
-  {
-   "kind": "decision",
-   "note": "BNB/USDT achet\u00e9 score 0.97 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "entry",
-   "note": "BNB/USDT $7.58 @ 747.2890401577279 \u2014 AGENT 02/MEMORY-2"
-  },
-  {
-   "kind": "decision",
-   "note": "ETH/USDT achet\u00e9 score 0.76 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "ETH/USDT \u2014 max entr\u00e9es/h"
-  },
-  {
-   "kind": "decision",
-   "note": "DOGE/USDT refus\u00e9 score 0.59 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "XRP/USDT achet\u00e9 score 0.91 (MEMORY)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "XRP/USDT \u2014 max entr\u00e9es/h"
-  },
-  {
-   "kind": "trade",
-   "note": "GAIN "
-  },
-  {
-   "kind": "postmortem",
-   "note": "GAIN BNB/USDT +0.0911 $ en 6 min | TP | mom15@entr\u00e9e +0.34 % | vol \u00d70.7 | agent AGENT 02/MEMORY-2"
-  },
-  {
-   "kind": "decision",
-   "note": "BTC/USDT achet\u00e9 score 0.84 (MEMORY-2)",
-   "verdict": true
-  },
-  {
-   "kind": "risk_block",
-   "note": "BTC/USDT \u2014 max entr\u00e9es/h"
-  },
-  {
-   "kind": "decision",
-   "note": "LINK/USDT refus\u00e9 score 0.66 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "restore",
-   "note": ""
-  },
-  {
-   "kind": "boot",
-   "note": "mode ccxt:binance \u00b7 banque $30.0"
-  },
-  {
-   "kind": "decision",
-   "note": "PEPE/USDT refus\u00e9 score 0.64 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SNDKB/USDT refus\u00e9 score 0.57 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SOXLB/USDT refus\u00e9 score 0.53 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "TAO/USDT refus\u00e9 score 0.54 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ADA/USDT refus\u00e9 score 0.43 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ZEC/USDT refus\u00e9 score 0.53 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "PUMP/USDT refus\u00e9 score 0.73 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "BNB/USDT refus\u00e9 score 0.68 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SUI/USDT refus\u00e9 score 0.58 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "UNI/USDT refus\u00e9 score 0.75 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "WLD/USDT refus\u00e9 score 0.59 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "QNT/USDT refus\u00e9 score 0.44 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SOXLB/USDT refus\u00e9 score 0.64 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "TAO/USDT refus\u00e9 score 0.49 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "TRUMP/USDT refus\u00e9 score 0.43 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ALT/USDT refus\u00e9 score 0.48 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "PUMP/USDT refus\u00e9 score 0.69 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "head_review",
-   "note": "LICENCIEMENT AGENT 02 (execution) v1 \u2192 v2 (score 0.50) \u2014 reprogrammation par AUDIT"
-  },
-  {
-   "kind": "head_review",
-   "note": "LICENCIEMENT AGENT 02 (execution) v1 \u2192 v2 (score 0.50) \u2014 reprogrammation par AUDIT"
-  },
-  {
-   "kind": "decision",
-   "note": "AAVE/USDT refus\u00e9 score 0.48 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "MSTRB/USDT refus\u00e9 score 0.38 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ZEC/USDT refus\u00e9 score 0.58 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "DOGE/USDT refus\u00e9 score 0.51 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SNDKB/USDT refus\u00e9 score 0.51 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "ADA/USDT refus\u00e9 score 0.56 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "STRK/USDT refus\u00e9 score 0.44 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "PEPE/USDT refus\u00e9 score 0.58 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "PUMP/USDT refus\u00e9 score 0.50 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SOXLB/USDT refus\u00e9 score 0.48 (MEMORY)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
-   "note": "SUI/USDT refus\u00e9 score 0.56 (MEMORY-2)",
-   "verdict": false
-  },
-  {
-   "kind": "decision",
    "note": "UNI/USDT refus\u00e9 score 0.55 (MEMORY)",
    "verdict": false
   },
@@ -330,6 +95,237 @@
   {
    "kind": "boot",
    "note": "mode ccxt:binance \u00b7 banque $30.0"
+  },
+  {
+   "kind": "decision",
+   "note": "AI/USDT achet\u00e9 score 1.00 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "AI/USDT $7.61 @ 0.020210099999999998 \u2014 EXEC/MEMORY"
+  },
+  {
+   "kind": "decision",
+   "note": "STRK/USDT refus\u00e9 score 0.53 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ARB/USDT refus\u00e9 score 0.38 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "XAUT/USDT refus\u00e9 score 0.73 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SOXLB/USDT refus\u00e9 score 0.42 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "feed_degrade",
+   "note": ""
+  },
+  {
+   "kind": "feed_recover",
+   "note": ""
+  },
+  {
+   "kind": "decision",
+   "note": "WLD/USDT refus\u00e9 score 0.78 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ZEC/USDT refus\u00e9 score 0.82 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SUI/USDT refus\u00e9 score 0.56 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SNDKB/USDT refus\u00e9 score 0.54 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SOXLB/USDT refus\u00e9 score 0.62 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "QNT/USDT refus\u00e9 score 0.53 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ZEC/USDT refus\u00e9 score 0.59 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "AAVE/USDT refus\u00e9 score 0.51 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "WLD/USDT refus\u00e9 score 0.55 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SPCXB/USDT refus\u00e9 score 0.55 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN AI/USDT +0.0148 $ en 90 min | TIMEOUT | mom15@entr\u00e9e +0.00 % | vol \u00d70.1 | agent EXEC/MEMORY"
+  },
+  {
+   "kind": "decision",
+   "note": "SNDKB/USDT refus\u00e9 score 0.63 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "NEAR/USDT refus\u00e9 score 0.74 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ARB/USDT refus\u00e9 score 0.52 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "CRCLB/USDT refus\u00e9 score 0.49 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SOXLB/USDT achet\u00e9 score 0.86 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "SOXLB/USDT $9.13 @ 89.96495999999999 \u2014 SNIPER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "TAO/USDT refus\u00e9 score 0.65 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "LTC/USDT refus\u00e9 score 0.53 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "ETH/USDT refus\u00e9 score 0.56 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "XRP/USDT refus\u00e9 score 0.52 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "HYPE/USDT refus\u00e9 score 0.58 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "AI/USDT achet\u00e9 score 0.96 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "AI/USDT $6.39 @ 0.02051025 \u2014 ROUTER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "ZEC/USDT refus\u00e9 score 0.59 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "MSTRB/USDT refus\u00e9 score 0.54 (MEMORY-2)",
+   "verdict": false
+  },
+  {
+   "kind": "decision",
+   "note": "SUI/USDT refus\u00e9 score 0.61 (MEMORY)",
+   "verdict": false
+  },
+  {
+   "kind": "trade",
+   "note": "PERTE "
+  },
+  {
+   "kind": "postmortem",
+   "note": "PERTE AI/USDT -0.0813 $ en 3 min | SL | mom15@entr\u00e9e -0.49 % | vol \u00d73.0 | agent ROUTER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "AAVE/USDT achet\u00e9 score 0.83 (MEMORY-2)",
+   "verdict": true
+  },
+  {
+   "kind": "risk_block",
+   "note": "AAVE/USDT \u2014 gel tr\u00e9sorerie"
+  },
+  {
+   "kind": "head_review",
+   "note": "PROMOTION EXEC (execution) \u2192 budget \u00d71.2 (score 0.80, 6W/2L)"
+  },
+  {
+   "kind": "head_review",
+   "note": "PROMOTION EXEC (execution) \u2192 budget \u00d71.2 (score 0.80, 6W/2L)"
+  },
+  {
+   "kind": "trade",
+   "note": "GAIN "
+  },
+  {
+   "kind": "postmortem",
+   "note": "GAIN SOXLB/USDT +0.1326 $ en 21 min | TP | mom15@entr\u00e9e +0.82 % | vol \u00d72.0 | agent SNIPER/MEMORY-2"
+  },
+  {
+   "kind": "decision",
+   "note": "SNDKB/USDT achet\u00e9 score 0.90 (MEMORY)",
+   "verdict": true
+  },
+  {
+   "kind": "entry",
+   "note": "SNDKB/USDT $7.62 @ 1329.10422 \u2014 AGENT 01/MEMORY"
+  },
+  {
+   "kind": "trade",
+   "note": "PERTE "
+  },
+  {
+   "kind": "postmortem",
+   "note": "PERTE SNDKB/USDT -0.0818 $ en 3 min | SL | mom15@entr\u00e9e -0.06 % | vol \u00d72.7 | agent AGENT 01/MEMORY"
+  },
+  {
+   "kind": "feed_degrade",
+   "note": ""
+  },
+  {
+   "kind": "feed_recover",
+   "note": ""
   }
  ]
 }
