@@ -382,3 +382,32 @@ matrice rev 16), **feed_live dès le boot** (offline False), watchdog v2
 **Porte 30 trades** : 30 trades TOTALS dont **23 opérationnels** (live 10 +
 unknown 13) et 7 démo offline exclus — la porte reste jugée sur opérationnel:
 **23/30**, 7 à mener. PnL net réalisé +0.43 $ (17W/13L, mélange démo incl.).
+
+---
+
+# Phase F-2 / B8 — **2026-10-22** ✅ (suite)
+
+**F-2 · `tools/verdict.py`** — porte de verdict statistique MÉCANIQUE :
+opératoire = `live`+`unknown`, `offline` TOUJOURS exclus (les démo ne
+arrondiront jamais l'échantillon). < 30 opérationnels → code 1
+« NON-QUALIFIÉ », descriptif seul. ≥ 30 → IC95 % Wilson du taux de victoire,
+PnL/trade moyen ± 1.96·SE, profit factor, retrait max réalisé (ex-post),
+split chronologique 60/40 calibration/validation. Aucun mot rentable/
+garanti possible (test anti-dérapage). 6 tests. Corpus actuel : **23/30**,
+W/L 12/11, net +0.1374 $, Wilson [0.330 ; 0.708] — intervalle ample qui
+ENVELOPPE 0.5 : impossible de dire quoi que ce soit, et l'outil le dit.
+
+**B8 · rotation archivistique JSONL** — `Store` : au-delà de
+`jsonl_max_bytes` (défaut 5 Mo), `events.jsonl` est RENOMMÉ (jamais effacé)
+en `.archive-<utc>` (suffixe .N si collision), nouveau miroir → marqueur
+`kind=rotate` en tête pointant l'archive. Chaîne de marqueurs
+auto-cohérente (chaque rotation N écrit son marqueur ; le courant devient
+l'archive N+1 avec le marqueur N en tête). SQLite = source de vérité,
+indépendante (test). Zéro perte vérifiée (counters 0..11 complets à travers
+archives). 4 tests ; une ligne ne JAMAIS être scindée (rotation à la
+prochaine émission). Bugs de mes proprio models corrigés (tri lexico du
+suffixe .3, lecture d'un fichier inconnu, invariant « < seuil » trop
+rigide, drawdown de [-2,+1,-1] = 2.0 pas 3.0).
+
+**Déploiement** : restart 11:33, restore complet (30 trades, rev 16),
+verify code 0. Suite complète : **128 passed** (124 → 128). Commit séparés.
