@@ -1,21 +1,21 @@
 {
- "ts": "2026-10-21T22:07:36Z",
+ "ts": "2026-10-22T09:00:20Z",
  "ticks": 3,
  "paused": false,
  "feed": {
   "offline": false,
   "name": "binance",
-  "ts": 1792620396.0547473,
-  "age_s": 60
+  "ts": 1792659603.4341505,
+  "age_s": 17
  },
  "ledger": {
   "start_usdt": 30.0,
-  "wallet_usdt": 30.4798,
+  "wallet_usdt": 30.4307,
   "vault_usdt": 0.0,
-  "fees_paid": 0.2178,
+  "fees_paid": 0.3806,
   "mtm_usdt": 0.0,
-  "wins": 11,
-  "losses": 8,
+  "wins": 17,
+  "losses": 13,
   "equity": [
    30.0,
    30.08,
@@ -36,7 +36,18 @@
    30.26,
    30.31,
    30.39,
-   30.48
+   30.48,
+   30.51,
+   30.39,
+   30.31,
+   30.14,
+   30.05,
+   30.13,
+   30.22,
+   30.29,
+   30.4,
+   30.34,
+   30.43
   ]
  },
  "positions": [],
@@ -287,6 +298,149 @@
    "agent": "ROUTER",
    "approver": "MEMORY-2",
    "score": 0.701
+  },
+  {
+   "symbol": "ZEC/USDT",
+   "entry": 1317.4584,
+   "exit": 1324.97718,
+   "qty": 0.005778079975807965,
+   "pnl": 0.0282,
+   "reason": "TIMEOUT",
+   "ts_open": 1792625612.4241655,
+   "ts_close": 1792631053.1548958,
+   "agent": "EXEC",
+   "approver": "MEMORY",
+   "score": 0.858
+  },
+  {
+   "symbol": "ZEC/USDT",
+   "entry": 1312.656,
+   "exit": 1298.5004250000002,
+   "qty": 0.006963629465754928,
+   "pnl": -0.1168,
+   "reason": "SL",
+   "ts_open": 1792633585.7780957,
+   "ts_close": 1792635550.8112748,
+   "agent": "SNIPER",
+   "approver": "MEMORY-2",
+   "score": 0.947
+  },
+  {
+   "symbol": "QNT/USDT",
+   "entry": 203.73181499999998,
+   "exit": 201.94897500000002,
+   "qty": 0.03726663898812269,
+   "pnl": -0.0816,
+   "reason": "SL",
+   "ts_open": 1792636405.5835636,
+   "ts_close": 1792638554.3276224,
+   "agent": "ROUTER",
+   "approver": "MEMORY",
+   "score": 0.692
+  },
+  {
+   "symbol": "ZEC/USDT",
+   "entry": 1300.7600549999997,
+   "exit": 1264.0076800000002,
+   "qty": 0.004377671330013283,
+   "pnl": -0.1721,
+   "reason": "SL",
+   "ts_open": 1792636450.43555,
+   "ts_close": 1792649735.4905593,
+   "agent": "AGENT 01",
+   "approver": "MEMORY",
+   "score": 0.766
+  },
+  {
+   "symbol": "BNB/USDT",
+   "entry": 739.7602607580282,
+   "exit": 732.6479065377364,
+   "qty": 0.01016879440413813,
+   "pnl": -0.0873,
+   "reason": "SL",
+   "ts_open": 1792654542.1041305,
+   "ts_close": 1792654891.8302522,
+   "agent": "AGENT 02",
+   "approver": "MEMORY",
+   "score": 0.724
+  },
+  {
+   "symbol": "SOL/USDT",
+   "entry": 101.8001195306641,
+   "exit": 103.03089564611616,
+   "qty": 0.07369824352455803,
+   "pnl": 0.0756,
+   "reason": "TP",
+   "ts_open": 1792655981.4948199,
+   "ts_close": 1792656217.2061286,
+   "agent": "AGENT 03",
+   "approver": "MEMORY",
+   "score": 0.836
+  },
+  {
+   "symbol": "ETH/USDT",
+   "entry": 2444.5771865872093,
+   "exit": 2480.4512784620824,
+   "qty": 0.0030772069874798525,
+   "pnl": 0.0952,
+   "reason": "TP",
+   "ts_open": 1792656349.6331303,
+   "ts_close": 1792656542.046032,
+   "agent": "EXEC",
+   "approver": "MEMORY-2",
+   "score": 0.687
+  },
+  {
+   "symbol": "DOGE/USDT",
+   "entry": 0.0819076672505156,
+   "exit": 0.08286092266663982,
+   "qty": 82.69335737866913,
+   "pnl": 0.0652,
+   "reason": "TP",
+   "ts_open": 1792656422.0684597,
+   "ts_close": 1792657266.695828,
+   "agent": "SNIPER",
+   "approver": "MEMORY-2",
+   "score": 0.727
+  },
+  {
+   "symbol": "LINK/USDT",
+   "entry": 11.960688255973023,
+   "exit": 12.137035778904254,
+   "qty": 0.759229720368734,
+   "pnl": 0.1156,
+   "reason": "TP",
+   "ts_open": 1792657388.6379418,
+   "ts_close": 1792658059.4299018,
+   "agent": "ROUTER",
+   "approver": "MEMORY",
+   "score": 0.756
+  },
+  {
+   "symbol": "SOL/USDT",
+   "entry": 99.17433451273898,
+   "exit": 98.20660105356274,
+   "qty": 0.05338780467762951,
+   "pnl": -0.0622,
+   "reason": "SL",
+   "ts_open": 1792657937.404727,
+   "ts_close": 1792658190.075309,
+   "agent": "AGENT 01",
+   "approver": "MEMORY",
+   "score": 0.806
+  },
+  {
+   "symbol": "BNB/USDT",
+   "entry": 747.2890401577279,
+   "exit": 757.7825215066404,
+   "qty": 0.010133187552706131,
+   "pnl": 0.0911,
+   "reason": "TP",
+   "ts_open": 1792658192.0528073,
+   "ts_close": 1792658572.3280747,
+   "agent": "AGENT 02",
+   "approver": "MEMORY-2",
+   "score": 0.966
   }
  ],
  "agents": [
@@ -321,26 +475,26 @@
    "name": "MEMORY",
    "desk": "research",
    "budget": 1.0,
-   "score": 0.5,
-   "wins": 0,
-   "losses": 0,
-   "rev": "v2"
+   "score": 0.45,
+   "wins": 1,
+   "losses": 1,
+   "rev": "v3"
   },
   {
    "name": "MEMORY-2",
    "desk": "research",
-   "budget": 1.2,
-   "score": 0.65,
-   "wins": 6,
-   "losses": 3,
+   "budget": 1.8,
+   "score": 0.8,
+   "wins": 9,
+   "losses": 4,
    "rev": "v1"
   },
   {
    "name": "EXEC",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.5,
-   "wins": 3,
+   "score": 0.7,
+   "wins": 5,
    "losses": 2,
    "rev": "v1"
   },
@@ -348,44 +502,44 @@
    "name": "SNIPER",
    "desk": "execution",
    "budget": 1.2,
-   "score": 0.65,
-   "wins": 3,
-   "losses": 1,
+   "score": 0.6,
+   "wins": 4,
+   "losses": 2,
    "rev": "v1"
   },
   {
    "name": "ROUTER",
    "desk": "execution",
-   "budget": 1.0,
-   "score": 0.65,
-   "wins": 3,
-   "losses": 1,
+   "budget": 1.2,
+   "score": 0.6,
+   "wins": 4,
+   "losses": 2,
    "rev": "v1"
   },
   {
    "name": "AGENT 01",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.55,
+   "score": 0.25,
    "wins": 2,
-   "losses": 1,
+   "losses": 3,
    "rev": "v1"
   },
   {
    "name": "AGENT 02",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.2,
-   "wins": 0,
-   "losses": 2,
+   "score": 0.15,
+   "wins": 1,
+   "losses": 3,
    "rev": "v1"
   },
   {
    "name": "AGENT 03",
    "desk": "execution",
    "budget": 1.0,
-   "score": 0.35,
-   "wins": 0,
+   "score": 0.45,
+   "wins": 1,
    "losses": 1,
    "rev": "v1"
   },
@@ -418,11 +572,11 @@
   }
  ],
  "matrix": {
-  "pass_threshold": 0.636,
+  "pass_threshold": 0.654,
   "min_momentum": 0.0027,
-  "min_vol_surprise": 1.5,
+  "min_vol_surprise": 1.7,
   "max_momentum_1h": 0.06,
-  "revisions": 10
+  "revisions": 16
  },
  "risk": {
   "blocks": 0,
@@ -439,9 +593,9 @@
   "firings": 0
  },
  "snapshot_meta": {
-  "snapshot_ts": "2026-10-21 22:07:41 UTC",
+  "snapshot_ts": "2026-10-22 09:00:35 UTC",
   "events_kept": 70,
-  "net": 30.48,
-  "trades": 19
+  "net": 30.43,
+  "trades": 30
  }
 }
