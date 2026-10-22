@@ -53,6 +53,8 @@ class Desk:
         # reflète l'état RÉEL du feed (--offline explicite ou bascule offline),
         # jamais un nom de processus.
         self.store.mode = "offline" if (offline or self.feed.offline) else "live"
+        # B7 : balise de transition du feed — None au boot (1er tick muet).
+        self._feed_was_offline: bool | None = None
         self.last_feats: dict[str, Any] = {}
         self.paused = False
         self.stop = False
@@ -191,15 +193,30 @@ class Desk:
         # B5 : si le feed a basculé offline (2 échecs réseau), le mode suit l'état
         # réel des données — les trades de démo seront étiquetés 'offline'.
         self.store.mode = "offline" if self.feed.offline else "live"
+        # B7 : événement de transition (le flip live→offline était muet).
+        if self._feed_was_offline is not None and self.feed.offline != self._feed_was_offline:
+            self.store.add_event(
+                "feed_recover" if not self.feed.offline else "feed_degrade",
+                {"name": self.feed.name})
+        self._feed_was_offline = self.feed.offline
         closes = self._manage_positions(feats, now)
         signals = 0
         decisions = 0
         entries = 0
+        # B7 : feed DÉGRADÉ de façon autonome → plus AUCUNE nouvelle entrée : les
+        # données sont un random walk inventé (les 6 trades « offline » de la nuit
+        # l'ont prouvé), le B2 freshness est aveugle là-dessus (ts=now factice).
+        # La gestion des positions (SL/TP), le gel et la comptabilité continuent.
+        # Une session démo EXPLICITE (--offline) reste intégralement opérationnelle :
+        # c'est son rôle de test.
+        degraded = self.feed.offline and not getattr(self.feed, "explicit", False)
         if not self.paused:
             self.risk.check_treasury_freeze()   # B4 : gel évalué à CHAQUE tick
                                                 # (précédemment 1×/h → latence jusqu'à 1 h)
-            sigs = self.radar.scan(feats, set(self.broker.open), now,
-                                   self.m.min_quote_volume)
+            sigs: list = []
+            if not degraded:
+                sigs = self.radar.scan(feats, set(self.broker.open), now,
+                                       self.m.min_quote_volume)
             signals = len(sigs)
             for sig in sigs:
                 d = self.research.decide(sig, now)

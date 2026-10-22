@@ -21,6 +21,7 @@ class Feed:
         self.ex: ccxt.Exchange | None = None
         self.name: str | None = None
         self.offline = offline
+        self.explicit = offline     # démo EXPLICITE (--offline) ≠ bascule réseau
         self._universe: list[str] = []
         self._last_price: dict[str, float] = {}
         self._offline_rng = random.Random(7)
@@ -52,20 +53,34 @@ class Feed:
         now = time.time()
         if now - self._last_refresh < min_interval and self._cached:
             return self._cached
+        # B7 : rétablissement — après une bascule réseau autonome (`ex` reste en
+        # vie), re-tenter les VRAIS marchés à chaque cycle de rafraîchissement.
+        # Une session démo explicite n'a pas de `ex` → reste en démo ; une fois
+        # repassé live, le feed suit la voie normale.
+        tickers = None
+        if self.offline and self.ex is not None:
+            try:
+                tickers = self.ex.fetch_tickers()
+                self.offline = False        # données réelles rétablies
+            except Exception:
+                self._last_refresh = now
+                self._cached = self._offline_snapshot(top_n)
+                return self._cached
         if self.offline or self.ex is None:
             self._last_refresh = now
             self._cached = self._offline_snapshot(top_n)
             return self._cached
-        try:
-            tickers = self.ex.fetch_tickers()
-        except Exception:
+        if tickers is None:
             try:
-                tickers = self.ex.fetch_tickers(self.symbols())
+                tickers = self.ex.fetch_tickers()
             except Exception:
-                self.offline = True
-                self._last_refresh = now
-                self._cached = self._offline_snapshot(top_n)
-                return self._cached
+                try:
+                    tickers = self.ex.fetch_tickers(self.symbols())
+                except Exception:
+                    self.offline = True
+                    self._last_refresh = now
+                    self._cached = self._offline_snapshot(top_n)
+                    return self._cached
         rows: list[tuple[float, tuple[str, dict[str, Any]]]] = []
         for sym, t in tickers.items():
             if not (sym.endswith("/USDT") and ":" not in sym):
