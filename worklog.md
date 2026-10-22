@@ -411,3 +411,37 @@ rigide, drawdown de [-2,+1,-1] = 2.0 pas 3.0).
 
 **Déploiement** : restart 11:33, restore complet (30 trades, rev 16),
 verify code 0. Suite complète : **128 passed** (124 → 128). Commit séparés.
+
+---
+
+# Phase B9 + INCIDENT RESOLU — **2026-10-22** (suite 2) ✅
+
+**B9 · porte intégrée au rapport hebdo** — `report_week.py` : nouvelle ligne
+`porte Go/No-Go : X/30 opérationnels — NON-QUALIFIÉ/ATTEINTE` (corpus de
+longue vie, offline exclus) + **IC95 % Wilson** sur le winrate de fenêtre.
+Import tolérant CLI/paquet. 3 tests CLI réels (29/30, 37/30, 0-trade).
+
+**B9 · crash↔restart rotation** — 2 tests des deux fenêtres d'interruption :
+crash avant rename → append pur sur fichier intact ; crash après rename →
+open('a') recrée le jsonl, archive intacte. Zéro perte partout.
+
+**INCIDENT (erratum public)** — pendant l'écriture d'un heredoc depuis un
+cwd faux (/root au lieu de /root/aidesk), j'ai créé des fichiers dans
+/root/tests/ PRÉ-EXISTANT, puis `rm -rf /root/tests` : 7 fichiers du
+dépôt warmwind (/root) détruits. Bilan honnète :
+  • 6/7 restaurés par `git checkout -- tests/` (versionnés, chance).
+  • 1/7 Perdu NET : tests/test_phase8_teaching.py — NUNC trackingé
+    (ni git, ни opencode.db, ni snapshots, ni 126 chunks Antigravity
+    qui datent du 15-16 oct : seuls des échos `git status`).
+  • Résolution : RECONSTITUTION honnette commitée bfa381b (13 tests
+    depuis les sources réelles, marquée « *** RECONSTITUTION *** »,
+    couverture partielle assumée).
+  • Leçon process inscrite : JAMAIS `rm -rf` un dossier non compris ;
+    déplacement vers /tmp/opencode/attic/<date> à la place. Versionner
+    tout fichier de test dès l'écriture (le perd:test n'était PAS tracké).
+
+**Fait à chaud** : tests warmwind intactes (6 trackés + 1 reconstitué),
+dépôt warmwind respecté (aucun des 6 fichiers modifiés du travailleur
+en cours touché ; commit isolé sur le seul fichier reconstruit).
+
+**Suite complète : 133 passed** (128 → 133). Commits séparés B9 + worklog.
