@@ -4,6 +4,7 @@ import json
 import os
 import sqlite3
 import time
+from pathlib import Path
 from typing import Any, Iterable
 
 SCHEMA = """
@@ -28,8 +29,27 @@ CREATE INDEX IF NOT EXISTS idx_decisions_ts ON decisions(ts);
 """
 
 
+def _archive_name(jsonl: str | Path, stamp: str) -> Path:
+    """Nom d'archive unique : events.jsonl.archive-<stamp>[.N] (JAMAIS écraser)."""
+    base = Path(f"{jsonl}.archive-{stamp}")
+    p, n = base, 1
+    while p.exists():
+        p = Path(f"{base}.{n}")
+        n += 1
+    return p
+
+
 class Store:
-    def __init__(self, path: str = "aidesk.db", jsonl: str = "events.jsonl") -> None:
+    """SQLite (source de vérité) + miroir JSONL borné par ARCHIVE (jamais effacé).
+
+    Le miroir `events.jsonl` est tourné (renommé en `.archive-<utc stamp>`)
+    quand il dépasse `jsonl_max_bytes` (défaut 5 Mo). Aucune ligne n'est
+    détruite ; l'historique reste intact dans les archives et dans SQLite.
+    """
+    DEFAULT_JSONL_BYTES = 5_000_000
+
+    def __init__(self, path: str = "aidesk.db", jsonl: str = "events.jsonl",
+                 jsonl_max_bytes: int | None = None) -> None:
         self.conn = sqlite3.connect(path)
         self.conn.executescript(SCHEMA)
         self.conn.commit()
@@ -44,7 +64,31 @@ class Store:
             self.conn.commit()
         self.mode: str = "unknown"      # 'live' | 'offline' | 'unknown' (fixé par le desk)
         self.jsonl_path = jsonl
-        self._fh = open(jsonl, "a", encoding="utf-8")
+        # B8 — rotation archivistique du miroir JSONL : seuil en octets.
+        self.jsonl_max_bytes = (self.DEFAULT_JSONL_BYTES if jsonl_max_bytes is None
+                                else max(1, int(jsonl_max_bytes)))
+        self._open_jsonl()
+
+    def _open_jsonl(self) -> None:
+        self._fh = open(self.jsonl_path, "a", encoding="utf-8")
+
+    def _rotate_if_needed(self) -> None:
+        try:
+            size = self._fh.tell()
+        except (OSError, ValueError):
+            return
+        if size < self.jsonl_max_bytes:
+            return
+        self._fh.close()
+        stamp = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
+        arch = _archive_name(self.jsonl_path, stamp)   # suffixe .N si collision
+        os.rename(self.jsonl_path, arch)               # RENOMME — ne détruit jamais
+        self._open_jsonl()
+        self._fh.write(json.dumps(
+            {"ts": time.time(), "kind": "rotate",
+             "payload": {"archive": arch.name, "bytes": size}},
+            default=str) + "\n")
+        self._fh.flush()
 
     def add_trade(self, t) -> None:
         self.conn.execute(
@@ -105,6 +149,7 @@ class Store:
         return self.conn.execute("SELECT count(*) FROM trades WHERE pnl > 0").fetchone()[0]
 
     def _emit(self, kind: str, payload: dict[str, Any]) -> None:
+        self._rotate_if_needed()   # B8 : rotation archivistique AVANT écriture
         self._fh.write(json.dumps({"ts": time.time(), "kind": kind, "payload": payload},
                                   default=str) + "\n")
         self._fh.flush()
