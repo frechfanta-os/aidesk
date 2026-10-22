@@ -338,3 +338,47 @@ invariants (suite existante).
 **Suite complète : 108 passed** (91 → 108). `runtime/feed` non touchés ;
 diff/secret/`--check` clean. Restart desk requis (research.py), Restauration
 vérifiée après commit.
+
+---
+
+# Phase B7 / E-2b — **2026-10-22** ✅
+
+**Diagnostic — erratum d'annonce** : à 08:42 je déclare « desk figé » ; FAUX —
+écart de 2 min avec le dernier tick, pas d'heures ; le thread était en
+nanosleep normal. Confirmé vivant par ouverture de 2 ticks réels. Erratum
+consigné : ne JAMAIS affirmer un figeage sans delta horaire récent calculé.
+
+**Défaut B7-1 observable en production** : 2 échecs réseau ~07:2x → flip
+offline MUET (aucun event) → random walk avec ts=now → radar B2 passe
+(flaîchise? fraîchesse contournée) → **7 trades démo étiquetés 'offline'
+(ids 24-30) sur la banque réelle** → recovery possible : `refresh()` ne
+retente JAMAIS le réseau une fois flip : démo permanente sans restart
+(feed offline de 07:2x à 08:57 malgré un réseau rétabli — BTC réel 81953).
+
+**B7-1 · feed/runtime** — `Feed.explicit` distingue la démo CLI (--offline)
+du flip réseau ; `refresh()` retente les VRAIS marchés à chaque cycle une
+fois dégradé (ex vivant) ; balises d'événements `feed_degrade`/`feed_recover`
+(fin du flip muet) ; desk dégradé autonome : ZÉRO nouvelle entrée (les
+données sont inventées), gestion SL/TP + gel B4 maintenus ; démo explicite
+reste pleine — c'est son rôle de test. 5 tests (rétablissement réel mocké,
+porte, transitions, démo CLI). Suite complète 118.
+
+**B7-2 · watchdog** — garde de fraîcheur : process vivant + state.json >
+stale_s → terminate/kill → relance. Jusqu'ici un hang SPÉCULATIF était
+indétectable (watchdog relance uniquement sur exit). Seuil défaut 900 s >
+pierrier légitime: prévoir breaker 600 s ; poll 20 s ; lecture tolérante
+(ne tue JAMAIS sur le doute). Fonction pure testée (4 cas).
+
+**E-2b · invariant equity corrigé** : l' « equity ≠ wallet+vault+mtm » de ce
+matin (0.03) était une erreur de MON outil : l'équité de la série est le
+RÉALISÉ (start + Σ PnL) — l'invariant correct est wallet+vault+ENGAGÉ des
+positions (22.76+0+7.58 = 30.34 exact ce matin) ; MTM flottant informatif
+hors invariant. Test du cas production ajouté (code 0 avec position).
+
+**Déploiement** : desk redémarré 08:57, restore complet vérifié (30 trades,
+matrice rev 16), **feed_live dès le boot** (offline False), watchdog v2
+(31199) actif, verify code 0. Dashboard 26678 inchangé.
+
+**Porte 30 trades** : 30 trades TOTALS dont **23 opérationnels** (live 10 +
+unknown 13) et 7 démo offline exclus — la porte reste jugée sur opérationnel:
+**23/30**, 7 à mener. PnL net réalisé +0.43 $ (17W/13L, mélange démo incl.).
