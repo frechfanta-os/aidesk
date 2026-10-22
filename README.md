@@ -60,6 +60,11 @@ Features `features_for_research()` prêtes pour la future integration RESEARCH d
   events.jsonl (code 0 OK / 1 avertissements / 2 fatal).
 - **Dataset versionné** : `python3 tools/export_dataset.py` — corpus CSV + manifeste
   SHA-256 dans `docs/data/exp/` (étiqueté : données expérimentales, aucune garantie).
+- **Porte de verdict** : `python3 tools/verdict.py` — seuil mécanique ≥ 30 trades
+  opérationnels (offline exclus), IC95 % Wilson, split chronologique 60/40 ;
+  avertissements chiffrés, jamais d'affirmation de rentabilité.
+- **Rotation JSONL** : le miroir `events.jsonl` s'archive automatiquement au-delà
+  de ~5 Mo (`events.jsonl.archive-<utc>`, jamais supprimé, marqueur `rotate` en tête).
 - **Tests** : `python3 -m pytest tests/ -q` (80 tests : broker, risk, matrice, research, head,
   restore, feed, dashboard, fraîcheur, skeptic, trésorerie, sessions, nettoyage).
 - **Runbook opérations** : `docs/RUNBOOK.md`.

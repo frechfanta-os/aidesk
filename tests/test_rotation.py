@@ -86,3 +86,33 @@ def test_sqlite_source_de_verite_independante(tmp_path):
     n_db = st.conn.execute("SELECT count(*) FROM events").fetchone()[0]
     assert n_db == 15                              # RIEN perdu côté SQLite
     st.close()
+
+
+# --- fenêtres de crash (B9) ------------------------------------------------------
+
+def test_crash_entre_close_et_rename_reprise_sans_perte(tmp_path):
+    """Crash supposé : handle jamais fermé, fichier intact → restart append pur."""
+    p = tmp_path / "t.jsonl"
+    st1 = Store(str(tmp_path / "t.db"), str(p), jsonl_max_bytes=100000)
+    st1.add_event("avant_crash", {"n": 1})
+    st1.conn.close()                          # kill -9 simulé : _fh jamais close
+    st2 = Store(str(tmp_path / "t.db"), str(p), jsonl_max_bytes=100000)
+    st2.add_event("apres_crash", {"n": 2})
+    kinds = [e["kind"] for e in read_jsonl(p)]
+    assert kinds == ["avant_crash", "apres_crash"]    # rien perdu, append correct
+    st2.close()
+
+
+def test_crash_apres_rename_reprise_avec_archive(tmp_path):
+    """Crash entre renommation et réouverture : archive créée, jsonl absent."""
+    p = tmp_path / "t.jsonl"
+    archive = tmp_path / "t.jsonl.archive-20260101T000000"
+    archive.write_text(json.dumps({"ts": 1, "kind": "pulse",
+                                   "payload": {"x": 9}}) + "\n")
+    # jsonl inexistant (crash post-rename) : open('a') le recrée
+    st = Store(str(tmp_path / "t.db"), str(p), jsonl_max_bytes=100000)
+    st.add_event("nouveau", {"n": 3})
+    assert archive.read_text().count("pulse") == 1    # archive intacte
+    kinds = [e["kind"] for e in read_jsonl(p)]
+    assert kinds == ["nouveau"]                       # fichier neuf, reprise LIVE
+    st.close()

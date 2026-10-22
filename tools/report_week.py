@@ -99,14 +99,35 @@ def main() -> None:
     prov_txt = " · ".join(f"{m} {n}" for m, n in sorted(prov.items())) or \
         "none (ancien schéma)"
 
+    # porte Go/No-Go (F-2) : corpus OPÉRATIONNEL de longue vie, hors fenêtre.
+    door_op = c.execute(
+        ("SELECT count(*) FROM trades WHERE COALESCE(mode,'unknown') "
+         "IN ('live','unknown')") if has_mode else
+        "SELECT count(*) FROM trades").fetchone()[0]
+
+    try:
+        from verdict import wilson            # exécution CLI (sys.path[0]=tools/)
+    except ImportError:                       # import paquet (pytest, SDK)
+        from tools.verdict import wilson
+
+    if n:
+        lo, hi = wilson(wins, n)              # proxy binomial sur la fenêtre
+        winrate_ci = (f" {100 * wins / n:.0f} %"
+                      f" IC95 % [{100 * lo:.0f} ; {100 * hi:.0f}]")
+    else:
+        winrate_ci = ""
+
     lines = [
         f"# RAPPORT DESK — {args.days} derniers jours",
         f"généré {time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime())}",
         "",
-        f"- trades clôturés : **{n}** (W {wins} / L {n - wins}) → winrate "
-        f"{100 * wins / n:.0f} %" if n else "- trades clôturés : **0** (trop tôt)",
+        f"- trades clôturés : **{n}** (W {wins} / L {n - wins}) → winrate"
+        f"{winrate_ci}" if n else "- trades clôturés : **0** (trop tôt)",
         f"- PnL cumulé : **{pnl:+.2f} $** | espérance/ trade : **{exp:+.4f} $**",
         f"- frais intégrés au PnL ; drawdown max : **{maxdd:.2f} %** peak {max(equity):.2f} $",
+        f"- porte Go/No-Go : **{door_op}/30** opérationnels "
+        + ("— NON-QUALIFIÉ (détail : `tools/verdict.py`) ; offline exclus"
+           if door_op < 30 else "— ATTEINTE (descriptif ex-post, jamais prédictif)"),
         f"- provenance trades : {prov_txt} | périmètre : **{args.mode}**",
         f"- decisions : {dec[0]} évaluées, {dec[1] or 0} acceptées | matrice révisions : {revs}",
         f"- courbe équité : `{spark(equity)}`",
